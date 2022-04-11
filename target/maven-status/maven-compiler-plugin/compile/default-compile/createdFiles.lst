@@ -1,2 +1,2 @@
-com/spring/springhelloworld/SpringHelloWorldApplication.class
-com/spring/springhelloworld/HelloWorldController.class
+com\spring\springhelloworld\HelloWorldController.class
+com\spring\springhelloworld\SpringHelloWorldApplication.class
