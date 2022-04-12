@@ -1,8 +1,8 @@
 package com.spring.backend.repository;
 
-import com.spring.backend.model.Employee;
+import com.spring.backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
     //all CRUD database methods
 }
