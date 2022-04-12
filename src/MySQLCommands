@@ -1,0 +1,6 @@
+CREATE TABLE Users(
+    username varchar(20),
+    password varchar(30),
+    email varchar(50),
+    CONSTRAINT Users_username_pk PRIMARY KEY (username)
+)
