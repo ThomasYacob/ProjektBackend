@@ -1,2 +1,5 @@
-C:\Users\zaed_\Documents\GitHub\Projekt\src\main\java\com\spring\springhelloworld\SpringHelloWorldApplication.java
-C:\Users\zaed_\Documents\GitHub\Projekt\src\main\java\com\spring\springhelloworld\HelloWorldController.java
+/Users/thomas/Documents/Projekt/src/main/java/com/spring/backend/repository/EmployeeRepository.java
+/Users/thomas/Documents/Projekt/src/main/java/com/spring/backend/exceptions/ResourceNotFoundException.java
+/Users/thomas/Documents/Projekt/src/main/java/com/spring/backend/model/Employee.java
+/Users/thomas/Documents/Projekt/src/main/java/com/spring/backend/controller/HelloWorldController.java
+/Users/thomas/Documents/Projekt/src/main/java/com/spring/backend/backendApplication.java
