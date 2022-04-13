@@ -12,7 +12,7 @@ public class User {
     @GeneratedValue
     @Column(name = "id")
     private int id;
-    @Column(name = "username", nullable = false, length = 512)
+    @Column(name = "username", nullable = false, length = 512,unique = true)
     private String username;
     @Column(name = "password" ,nullable = false, length = 512)
     private String password;
