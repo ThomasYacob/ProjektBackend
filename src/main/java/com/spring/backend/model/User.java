@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "userID")
     private int id;
     @Column(name = "username", nullable = false, length = 512,unique = true)
     private String username;
@@ -18,4 +18,12 @@ public class User {
     private String password;
     @Column(name = "mail", nullable = false, length = 512)
     private String mail;
+
+    /*@OneToOne
+    @JoinTable(name = "userScoreboard",
+            joinColumns =
+                    {@JoinColumn(name = "userId", referencedColumnName = "Userid")},
+            inverseJoinColumns =
+                    {@JoinColumn(name= "scoreId",referencedColumnName = "scoreID")})
+    private Scoreboard scoreboard;*/
 }
