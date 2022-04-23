@@ -12,12 +12,12 @@ public class User {
     @GeneratedValue
     @Column(name = "userID")
     private int id;
-    @Column(name = "username", nullable = false, length = 512,unique = true)
-    private String username;
+    @Column(name = "name", nullable = false, length = 512,unique = true)
+    private String name;
     @Column(name = "password" ,nullable = false, length = 512)
     private String password;
-    @Column(name = "mail", nullable = false, length = 512)
-    private String mail;
+    @Column(name = "email", nullable = false, length = 512)
+    private String email;
 
     /*@OneToOne
     @JoinTable(name = "userScoreboard",

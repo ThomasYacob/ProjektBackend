@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 public class HelloWorldController {
 
     @Autowired
@@ -17,7 +19,6 @@ public class HelloWorldController {
     public List<User> getAllUser(){
         return userRepository.findAll();
     }
-
     @PostMapping("/user")
     User createNewUser(@RequestBody User newUser){
         return userRepository.save(newUser);
