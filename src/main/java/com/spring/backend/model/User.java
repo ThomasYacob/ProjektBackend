@@ -12,8 +12,8 @@ public class User {
     @GeneratedValue
     @Column(name = "userID")
     private int id;
-    @Column(name = "name", nullable = false, length = 512,unique = true)
-    private String name;
+    @Column(name = "username", nullable = false, length = 512,unique = true)
+    private String username;
     @Column(name = "password" ,nullable = false, length = 512)
     private String password;
     @Column(name = "email", nullable = false, length = 512)
