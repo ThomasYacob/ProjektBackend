@@ -18,12 +18,4 @@ public class User {
     private String password;
     @Column(name = "email", nullable = false, length = 512)
     private String email;
-
-    /*@OneToOne
-    @JoinTable(name = "userScoreboard",
-            joinColumns =
-                    {@JoinColumn(name = "userId", referencedColumnName = "Userid")},
-            inverseJoinColumns =
-                    {@JoinColumn(name= "scoreId",referencedColumnName = "scoreID")})
-    private Scoreboard scoreboard;*/
 }

@@ -18,6 +18,4 @@ public class Scoreboard {
     private int weeklyScore;
     @Column(name = "monthlyScore")
     private int monthlyScore;
-    /*@OneToOne(mappedBy = "userScoreboard")
-    private User user;*/
 }
