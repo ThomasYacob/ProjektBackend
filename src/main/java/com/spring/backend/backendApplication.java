@@ -1,6 +1,6 @@
 package com.spring.backend;
 
-import com.spring.backend.repository.EmployeeRepository;
+import com.spring.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +14,7 @@ public class backendApplication implements CommandLineRunner {
     }
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private UserRepository employeeRepository;
 
     @Override
     public void run(String... args) throws Exception {

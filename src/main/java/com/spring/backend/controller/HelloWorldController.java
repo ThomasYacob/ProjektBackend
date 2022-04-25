@@ -1,24 +1,34 @@
 package com.spring.backend.controller;
 
-import com.spring.backend.model.Employee;
-import com.spring.backend.repository.EmployeeRepository;
+import com.spring.backend.model.User;
+import com.spring.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+
 public class HelloWorldController {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private UserRepository userRepository;
 
-    @GetMapping("/employees")
-    public List<Employee> getAllEmployees(){
-        return employeeRepository.findAll();
+    @GetMapping("/user")
+    public List<User> getAllUser(){
+        return userRepository.findAll();
     }
+    @PostMapping("/user")
+    User createNewUser(@RequestBody User newUser){
+        return userRepository.save(newUser);
+    }
+
+    @DeleteMapping("user/{id}")
+    void deleteuser(@PathVariable int id){
+        userRepository.deleteById(id);
+    }
+
 
     @RequestMapping
     public String goodBye(){
