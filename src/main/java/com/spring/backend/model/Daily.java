@@ -16,6 +16,8 @@ public class Daily {
     private int id;
     @Column(name = "question",nullable = false,length = 512)
     private String question;
+    @Column(name = "answer", nullable = false,length = 512)
+    private String answer;
     @Column(name = "dateToPublish")
     private Date date;
 }

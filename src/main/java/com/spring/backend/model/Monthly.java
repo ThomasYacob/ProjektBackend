@@ -16,6 +16,8 @@ public class Monthly {
     private int id;
     @Column(name = "question",nullable = false,length = 512)
     private String question;
+    @Column(name = "answer", nullable = false,length = 512)
+    private String answer;
     @Column(name = "hint1",nullable = false,length = 512)
     private String hint1;
     @Column(name = "hint2",nullable = false,length = 512)
