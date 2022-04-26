@@ -18,6 +18,6 @@ public class Daily {
     private String question;
     @Column(name = "answer", nullable = false,length = 512)
     private String answer;
-    @Column(name = "dateToPublish")
+    @Column(name = "dateToPublish",nullable = false)
     private Date date;
 }

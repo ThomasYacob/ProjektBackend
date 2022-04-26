@@ -1,7 +1,6 @@
-package com.spring.backend.controller;
+package com.spring.backend.service;
 
 import com.spring.backend.model.Scoreboard;
-import com.spring.backend.model.User;
 import com.spring.backend.repository.ScoreboardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

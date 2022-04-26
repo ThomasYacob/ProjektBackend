@@ -10,7 +10,6 @@ public class UserdailyscoreId implements Serializable {
     private Daily daily;
 
     public UserdailyscoreId(){
-
     }
 
     public UserdailyscoreId(User user, Scoreboard scoreboard, Daily daily) {
@@ -18,4 +17,8 @@ public class UserdailyscoreId implements Serializable {
         this.scoreboard = scoreboard;
         this.daily = daily;
     }
+
+
+
+
 }

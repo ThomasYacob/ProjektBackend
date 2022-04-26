@@ -1,9 +1,11 @@
 package com.spring.backend.controller;
 
+import com.spring.backend.service.UserService;
+import com.spring.backend.exceptions.ResourceNotFoundException;
 import com.spring.backend.model.User;
-import com.spring.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -13,19 +15,20 @@ import java.util.List;
 
 public class UserController {
 
-    private UserService userService;
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
 
     @GetMapping("all")
     public List<User> getAllUser(){
-        return userService.findAll();
+        return this.userService.findAllUsers();
     }
     @GetMapping("{id}")
-    User getUserByMail(@PathVariable String id){
-        return userService.getUser(id);
+    User getUserByMail(@PathVariable String id)throws ResponseStatusException {
+        try{
+            return this.userService.getUser(id);
+        }catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("User not found");
+        }
     }
 
 
@@ -36,7 +39,11 @@ public class UserController {
 
     @DeleteMapping("{id}")
     void deleteUser(@PathVariable String id){
-        userService.deleteUser(id);
+        try{
+            this.userService.deleteUser(id);
+        }catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("User not found");
+        }
     }
 
 }

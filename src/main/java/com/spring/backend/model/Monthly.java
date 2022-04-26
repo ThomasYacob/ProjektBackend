@@ -24,7 +24,7 @@ public class Monthly {
     private String hint2;
     @Column(name = "hint3",nullable = false,length = 512)
     private String hint3;
-    @Column(name = "dateToPublish")
+    @Column(name = "dateToPublish",nullable = false)
     private Date date;
 
 

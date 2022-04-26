@@ -1,5 +1,6 @@
-package com.spring.backend.controller;
+package com.spring.backend.service;
 
+import com.spring.backend.exceptions.ResourceNotFoundException;
 import com.spring.backend.model.Scoreboard;
 import com.spring.backend.model.User;
 import com.spring.backend.repository.UserRepository;
@@ -10,8 +11,8 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
-    private ScoreBoardService scoreBoardService;
+    private final UserRepository userRepository;
+    private final ScoreBoardService scoreBoardService;
 
     @Autowired
     public UserService(UserRepository userRepository,ScoreBoardService scoreBoardService){
@@ -19,12 +20,16 @@ public class UserService {
         this.scoreBoardService = scoreBoardService;
     }
 
-    public List<User> findAll(){
+    public List<User> findAllUsers(){
         return this.userRepository.findAll();
     }
 
-    public void deleteUser(String id){
-        this.userRepository.deleteById(id);
+    public void deleteUser(String email) throws ResourceNotFoundException{
+        if (this.userRepository.findById(email).isPresent())
+        {
+            this.userRepository.deleteById(email);
+        }
+        else throw new ResourceNotFoundException("User not found");
     }
 
     public User createNewUser(User user){
@@ -34,12 +39,12 @@ public class UserService {
         return user;
     }
 
-    public User getUser(String email){
+    public User getUser(String email) throws  ResourceNotFoundException{
         if (this.userRepository.findById(email).isPresent())
         {
-            return this.userRepository.findById(email).get();
+            return this.userRepository.getById(email);
         }
-        return null;
+        else throw new ResourceNotFoundException("User not found");
     }
 
 }
