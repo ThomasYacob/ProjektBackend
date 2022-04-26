@@ -10,6 +10,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@IdClass(UserdailyscoreId.class)
 public class Userdailyscore implements Serializable {
     @Column(name = "answer")
     private String answer;

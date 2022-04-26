@@ -1,4 +1,7 @@
 package com.spring.backend.repository;
 
-public class UserdailyscoreRepository {
+import com.spring.backend.model.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserdailyscoreRepository extends JpaRepository<Userdailyscore, UserdailyscoreId> {
 }

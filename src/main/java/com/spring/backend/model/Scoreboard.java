@@ -18,4 +18,11 @@ public class Scoreboard {
     private int weeklyScore;
     @Column(name = "monthlyScore")
     private int monthlyScore;
+    @OneToOne
+    @JoinColumn(name = "email")
+    private User user;
+
+    public Scoreboard(User user) {
+        this.user = user;
+    }
 }
