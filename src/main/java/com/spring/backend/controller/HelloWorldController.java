@@ -1,10 +1,10 @@
 package com.spring.backend.controller;
 
-import com.spring.backend.config.AuthenticationBean;
 import com.spring.backend.exceptions.ResourceNotFoundException;
 import com.spring.backend.model.User;
 import com.spring.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +16,10 @@ public class HelloWorldController {
 
     @Autowired
     private UserRepository userRepository;
+    /*@Autowired
+    private PasswordEncoder passwordEncoder;*/
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder encodePassword;
 
     @GetMapping("/user")
     public List<User> getAllUser(){
@@ -31,11 +33,8 @@ public class HelloWorldController {
 
     @PostMapping("/user")
     User createNewUser(@RequestBody User newUser){
-        User user = new User();
-        user.setUsername(newUser.getUsername());
-        user.setPassword(encodePassword(newUser.getPassword()));
-        user.setEmail(newUser.getEmail());
-        return userRepository.save(user);
+        newUser.setPassword(encodePassword(newUser.getPassword()));
+        return userRepository.save(newUser);
     }
 
     @DeleteMapping("user/{id}")
@@ -52,17 +51,16 @@ public class HelloWorldController {
         return userRepository.save(updateUser);
     }
 
-    @GetMapping("/basicauth")
-    public AuthenticationBean basicauth() {
-        return new AuthenticationBean("You are authenticated");
-    }
-
     @RequestMapping
     public String goodBye(){
         return "Hello from Spring Boot";
     }
 
-    private String encodePassword(String password) {
+    /*private String encodePassword(String password) {
         return passwordEncoder.encode(password);
+    }*/
+
+    private String encodePassword(String password) {
+        return encodePassword.encode(password);
     }
 }
