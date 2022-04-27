@@ -13,14 +13,7 @@ public class backendApplication implements CommandLineRunner {
         SpringApplication.run(backendApplication.class, args);
     }
 
-    @Autowired
-    private UserRepository employeeRepository;
-
     @Override
     public void run(String... args) throws Exception {
-        /*Employee employee = new Employee();
-        employee.setName("Adam");
-        employee.setAge(19);
-        employeeRepository.save(employee);*/
     }
 }

@@ -9,10 +9,11 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@IdClass(UserweeklyscoreId.class)
 public class Userweeklyscore implements Serializable {
-    @Column(name = "answer")
+    @Column(name = "answer",nullable = false)
     private String answer;
-    @Column(name = "dateSubmited")
+    @Column(name = "dateSubmited",nullable = false)
     private Date date;
     @OneToOne
     @Id

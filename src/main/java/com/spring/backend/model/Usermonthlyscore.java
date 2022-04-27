@@ -9,11 +9,11 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
+@IdClass(UsermonthlyscoreId.class)
 public class Usermonthlyscore implements Serializable {
-    @Column(name = "answer")
+    @Column(name = "answer",nullable = false)
     private String answer;
-    @Column(name = "dateSubmited")
+    @Column(name = "dateSubmited",nullable = false)
     private Date date;
     @OneToOne
     @Id
@@ -27,6 +27,4 @@ public class Usermonthlyscore implements Serializable {
     @Id
     @JoinColumn(name = "monthlyId")
     Daily daily;
-
-
 }

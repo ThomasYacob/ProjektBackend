@@ -1,4 +1,7 @@
 package com.spring.backend.repository;
 
-public class DailyRepository {
+import com.spring.backend.model.Daily;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DailyRepository extends JpaRepository<Daily,Integer> {
 }
