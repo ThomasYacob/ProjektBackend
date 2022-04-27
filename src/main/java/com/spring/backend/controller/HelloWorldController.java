@@ -5,7 +5,6 @@ import com.spring.backend.model.User;
 import com.spring.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +15,9 @@ public class HelloWorldController {
 
     @Autowired
     private UserRepository userRepository;
-    /*@Autowired
-    private PasswordEncoder passwordEncoder;*/
+
     @Autowired
-    private BCryptPasswordEncoder encodePassword;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/user")
     public List<User> getAllUser(){
@@ -56,11 +54,7 @@ public class HelloWorldController {
         return "Hello from Spring Boot";
     }
 
-    /*private String encodePassword(String password) {
-        return passwordEncoder.encode(password);
-    }*/
-
     private String encodePassword(String password) {
-        return encodePassword.encode(password);
+        return passwordEncoder.encode(password);
     }
 }

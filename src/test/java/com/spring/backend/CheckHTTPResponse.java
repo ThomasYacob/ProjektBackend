@@ -1,6 +1,7 @@
 package com.spring.backend;
 
 
+import com.spring.backend.controller.HelloWorldController;
 import com.spring.backend.model.User;
 import com.spring.backend.repository.UserRepository;
 import org.assertj.core.api.AssertionsForClassTypes;
@@ -35,6 +36,5 @@ public class CheckHTTPResponse {
         User user = userRepository.findByUsername(username);
         AssertionsForClassTypes.assertThat(user).isNotNull();
     }
-
 
 }

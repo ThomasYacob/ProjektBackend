@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import javax.sql.DataSource;
 
 @Configuration
@@ -46,16 +44,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/user").authenticated()
+        http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers("/").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .usernameParameter("username")
-                .defaultSuccessUrl("/user")
-                .permitAll()
-                .and()
-                .logout().logoutSuccessUrl("/").permitAll();
+                .defaultSuccessUrl("/")
+                .permitAll();
     }
+
+
 
 }

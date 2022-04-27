@@ -1,5 +1,6 @@
 package com.spring.backend;
 
+import com.spring.backend.model.User;
 import com.spring.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,13 +15,15 @@ public class backendApplication implements CommandLineRunner {
     }
 
     @Autowired
-    private UserRepository employeeRepository;
+    private UserRepository userRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        /*Employee employee = new Employee();
-        employee.setName("Adam");
-        employee.setAge(19);
-        employeeRepository.save(employee);*/
+        /*User user = new User();
+        user.setUsername("fenty");
+        user.setPassword("fenty123");
+        user.setEmail("fenty123@hotmail.com");
+        userRepository.save(user);*/
     }
+
 }
