@@ -29,6 +29,7 @@ public class UserController {
     public List<User> getAllUser(){
         return this.userService.findAllUsers();
     }
+
     @GetMapping("{id}")
     User getUserByMail(@PathVariable String id)throws ResponseStatusException {
         try{
@@ -37,7 +38,6 @@ public class UserController {
             throw new ResourceNotFoundException("User not found");
         }
     }
-
 
     @PostMapping()
     User createNewUser(@RequestBody User newUser){
@@ -66,5 +66,4 @@ public class UserController {
     public ResponseEntity<String> logging() {
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }
