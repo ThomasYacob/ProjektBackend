@@ -3,6 +3,7 @@ package com.spring.backend.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -44,14 +45,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().authorizeRequests()
+        /*http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers("/").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .usernameParameter("username")
                 .defaultSuccessUrl("/")
-                .permitAll();
+                .permitAll();*/
+        http.cors().and().csrf().
+                disable()
+                .authorizeRequests()
+                .antMatchers( "/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .httpBasic();
+        /*http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers("/user", "/login").authenticated()
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .usernameParameter("username")
+                .defaultSuccessUrl("/user")
+                .permitAll()
+                .and()
+                .logout().logoutSuccessUrl("/").permitAll();*/
+
     }
 
 

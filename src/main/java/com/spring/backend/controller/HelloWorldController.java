@@ -4,6 +4,8 @@ import com.spring.backend.exceptions.ResourceNotFoundException;
 import com.spring.backend.model.User;
 import com.spring.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +49,11 @@ public class HelloWorldController {
         updateUser.setPassword(userDetails.getPassword());
         updateUser.setEmail(userDetails.getEmail());
         return userRepository.save(updateUser);
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<String> logging() {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping
