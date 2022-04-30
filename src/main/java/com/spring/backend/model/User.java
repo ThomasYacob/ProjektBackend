@@ -7,6 +7,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "user")
 public class User {
     @Id
     @Column(name = "email", nullable = false, length = 512,unique = true)
