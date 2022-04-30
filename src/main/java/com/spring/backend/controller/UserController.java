@@ -9,14 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
-@RequestMapping("api/user")
-
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
@@ -25,12 +22,12 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public List<User> getAllUser(){
         return this.userService.findAllUsers();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     User getUserByMail(@PathVariable String id)throws ResponseStatusException {
         try{
             return this.userService.getUser(id);
@@ -44,7 +41,7 @@ public class UserController {
         return userService.createNewUser(newUser);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     void deleteUser(@PathVariable String id){
         try{
             this.userService.deleteUser(id);
@@ -53,7 +50,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public User updateUser(@PathVariable String id,@RequestBody User userdetails){
         try {
             return this.userService.updateUser(id,userdetails);
@@ -62,7 +59,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public ResponseEntity<String> logging() {
         return new ResponseEntity<>(HttpStatus.OK);
     }

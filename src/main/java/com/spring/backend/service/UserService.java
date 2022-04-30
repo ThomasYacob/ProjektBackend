@@ -7,7 +7,6 @@ import com.spring.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 @Service
 public class UserService {
@@ -52,7 +51,7 @@ public class UserService {
         updateUser.setUsername(userDetails.getUsername());
         updateUser.setPassword(userDetails.getPassword());
         updateUser.setEmail(userDetails.getEmail());
-        updateUser.setRole(userDetails.getRole());
+        //updateUser.setRole(userDetails.getRole());
         return userRepository.save(updateUser);
     }
 
