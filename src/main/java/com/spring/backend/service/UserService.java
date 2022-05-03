@@ -1,6 +1,7 @@
 package com.spring.backend.service;
 
 import com.spring.backend.exceptions.ResourceNotFoundException;
+import com.spring.backend.model.Role;
 import com.spring.backend.model.Scoreboard;
 import com.spring.backend.model.User;
 import com.spring.backend.repository.UserRepository;
@@ -53,6 +54,18 @@ public class UserService {
         updateUser.setEmail(userDetails.getEmail());
         //updateUser.setRole(userDetails.getRole());
         return userRepository.save(updateUser);
+    }
+
+    public User alterUserRole(String email, Role role) throws  ResourceNotFoundException{
+        if (this.userRepository.findById(email).isPresent())
+        {
+            User userToBeChanged = userRepository.getById(email);
+            userToBeChanged.setRole(role);
+            User updatedUser = userRepository.save(userToBeChanged);
+            return updatedUser;
+        }
+        else throw new ResourceNotFoundException("User not found");
+
     }
 
 }

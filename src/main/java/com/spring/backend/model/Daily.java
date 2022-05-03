@@ -16,8 +16,15 @@ public class Daily {
     private int id;
     @Column(name = "question",nullable = false,length = 512)
     private String question;
-    @Column(name = "answer", nullable = false,length = 512)
-    private String answer;
+    @Column(name = "alternative1", nullable = false,length = 512)
+    private String alternative1;
+    @Column(name = "alternative2", nullable = false,length = 512)
+    private String alternative2;
+    @Column(name = "alternative3", nullable = false,length = 512)
+    private String alternative3;
+    @Column(name = "rightAlternative", nullable = false)
+    private int rightAlternative;
     @Column(name = "dateToPublish",nullable = false)
     private Date date;
 }
+
