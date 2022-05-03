@@ -35,7 +35,14 @@ public class DailyService {
         if(this.dailyRepository.findById(id).isPresent()){
             this.dailyRepository.deleteById(id);
         }
-        else throw new ResourceNotFoundException("Daily not found");
+        else throw new ResourceNotFoundException();
+    }
+
+    public int findAnswerById(int id) throws ResourceNotFoundException{
+        if(this.dailyRepository.findById(id).isPresent()){
+            return dailyRepository.getById(id).getId();
+        }
+        else throw new ResourceNotFoundException();
     }
 
     public List<Daily> getAllDaily(){

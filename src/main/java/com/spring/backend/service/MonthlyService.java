@@ -36,6 +36,13 @@ public class MonthlyService {
         else throw new ResourceNotFoundException("Monthly not found");
     }
 
+    public String findAnswerById(int id) throws ResourceNotFoundException{
+        if(this.monthlyRepository.findById(id).isPresent()){
+            return this.monthlyRepository.getById(id).getAnswer();
+        }
+        else throw new ResourceNotFoundException();
+    }
+
     public List<Monthly> getAllMonthly(){
         return this.monthlyRepository.findAll();
     }

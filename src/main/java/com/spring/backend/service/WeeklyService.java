@@ -34,6 +34,13 @@ public class WeeklyService {
         else throw new ResourceNotFoundException("Weekly not found");
     }
 
+    public String findAnswerById(int id) throws ResourceNotFoundException{
+        if(this.weeklyRepository.findById(id).isPresent()){
+            return weeklyRepository.getById(id).getAnswer();
+        }
+        else throw new ResourceNotFoundException();
+    }
+
     public List<Weekly> getAllWeekly(){
         return this.weeklyRepository.findAll();
     }
