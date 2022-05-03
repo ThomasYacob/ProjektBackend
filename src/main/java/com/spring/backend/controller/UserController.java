@@ -1,5 +1,6 @@
 package com.spring.backend.controller;
 
+import com.spring.backend.model.Role;
 import com.spring.backend.service.UserService;
 import com.spring.backend.exceptions.ResourceNotFoundException;
 import com.spring.backend.model.User;
@@ -62,5 +63,14 @@ public class UserController {
     @GetMapping("/login")
     public ResponseEntity<String> logging() {
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("changeRole/{id}")
+    User changeRoleUser(@PathVariable String id,@RequestBody Role role){
+        try{
+            return this.userService.alterUserRole(id,role);
+        }catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("User not found");
+        }
     }
 }

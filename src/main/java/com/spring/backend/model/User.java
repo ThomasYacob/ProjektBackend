@@ -16,6 +16,6 @@ public class User {
     private String username;
     @Column(name = "password" ,nullable = false, length = 512)
     private String password;
-    /*@Enumerated(EnumType.ORDINAL)
-    private Role role;*/
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
