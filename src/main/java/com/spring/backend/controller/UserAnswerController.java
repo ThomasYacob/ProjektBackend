@@ -17,16 +17,4 @@ public class UserAnswerController {
     @Autowired
     private UserAnswerService userAnswerService;
 
-    @ResponseStatus(value = HttpStatus.ALREADY_REPORTED)
-    @PostMapping
-    public UserAnswer  createNewUserAnswer(@RequestBody UserAnswer userAnswer){
-        try{
-            return userAnswerService.createNewUserAnswer(userAnswer);
-        }
-        catch (RuntimeException e){
-            throw new RuntimeException("Answer already submitted");
-        }
-    }
-
-
 }

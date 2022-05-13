@@ -2,10 +2,13 @@ package com.spring.backend.model;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "user")
 public class User {
@@ -18,4 +21,6 @@ public class User {
     private String password;
     @Enumerated(EnumType.ORDINAL)
     private Role role;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    private Set<UserAnswer> userAnswers = new HashSet<>();
 }

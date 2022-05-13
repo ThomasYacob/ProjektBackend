@@ -52,9 +52,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable String id,@RequestBody User userdetails){
+    public User updateUser(@PathVariable String id,@RequestBody User userDetails){
         try {
-            return this.userService.updateUser(id,userdetails);
+            return this.userService.updateUser(id,userDetails);
         }catch (ResourceNotFoundException e){
             throw new ResourceNotFoundException("User not found");
         }

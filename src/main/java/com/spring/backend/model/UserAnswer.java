@@ -9,32 +9,35 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@IdClass(UserAnswerId.class)
 public class UserAnswer {
+    @Id
+    @GeneratedValue
+    @Column(name = "userAnswerid")
+    private long id;
     @Column(name = "answer",nullable = false)
     private String answer;
     @Column(name = "dateSubmited",nullable = false)
     private Date date;
-    @Column(name = "typeOfAnswer",nullable = false)
-    private String type;
-    @OneToOne
-    @Id
-    @JoinColumn(name = "userID",nullable = false)
+    @Enumerated(EnumType.STRING)
+    private typeOfQuestion typeOfQuestion;
+    @Column(name = "questionId")
+    private int questionId;
+    @ManyToOne
+    @ToString.Exclude
     private User user;
-    @OneToOne
-    @Id
-    @JoinColumn(name = "scoreId",nullable = false)
-    Scoreboard scoreboard;
-    @OneToOne
-    @Id
-    @JoinColumn(name = "dailyId",nullable = true)
-    Daily daily;
-    @OneToOne
-    @Id
-    @JoinColumn(name = "monthlyId",nullable = true)
-    Monthly monthly;
-    @OneToOne
-    @Id
-    @JoinColumn(name = "weeklyId",nullable = true)
-    Weekly weekly;
+
+    public UserAnswer(String answer, Date date, com.spring.backend.model.typeOfQuestion typeOfQuestion, int questionId, User user) {
+        this.answer = answer;
+        this.date = date;
+        this.typeOfQuestion = typeOfQuestion;
+        this.questionId = questionId;
+        this.user = user;
+    }
+
+    public UserAnswer(String answer, Date date, com.spring.backend.model.typeOfQuestion typeOfQuestion, int questionId) {
+        this.answer = answer;
+        this.date = date;
+        this.typeOfQuestion = typeOfQuestion;
+        this.questionId = questionId;
+    }
 }

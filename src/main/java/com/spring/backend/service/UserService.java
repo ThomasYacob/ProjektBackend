@@ -4,6 +4,7 @@ import com.spring.backend.exceptions.ResourceNotFoundException;
 import com.spring.backend.model.Role;
 import com.spring.backend.model.Scoreboard;
 import com.spring.backend.model.User;
+import com.spring.backend.model.UserAnswer;
 import com.spring.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,6 +40,10 @@ public class UserService {
         return user;
     }
 
+    public User createNewUserWithoutPasswordAndScoreBoard(User user){
+        return this.userRepository.save(user);
+    }
+
     public User getUser(String email) throws  ResourceNotFoundException{
         return userRepository.findById(email).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
     }
@@ -53,6 +58,17 @@ public class UserService {
         updateUser.setPassword(userDetails.getPassword());
         updateUser.setEmail(userDetails.getEmail());
         //updateUser.setRole(userDetails.getRole());
+        return userRepository.save(updateUser);
+    }
+
+    public User sendInAnswer(UserAnswer userAnswer){
+        User updateUser = userRepository.findById(userAnswer.getUser().getEmail()).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + userAnswer.getUser().getEmail()));
+        updateUser.getUserAnswers().add(userAnswer);
+        return userRepository.save(updateUser);
+    }
+
+    public User sendInAnswer(User updateUser, UserAnswer userAnswer){
+        updateUser.getUserAnswers().add(userAnswer);
         return userRepository.save(updateUser);
     }
 
