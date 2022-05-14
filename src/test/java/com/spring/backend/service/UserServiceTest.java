@@ -67,7 +67,7 @@ class UserServiceTest {
     void testAddUser() throws Exception{
         given(userRepository.save(user)).willReturn(user);
         User saveUser = userService.createNewUserWithoutPasswordAndScoreBoard(user);
-        System.out.println(saveUser);
+        System.out.println(userService.getUser("Redve@kth.se"));
         assertThat(saveUser).isNotNull();
     }
 

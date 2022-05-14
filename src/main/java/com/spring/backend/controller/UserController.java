@@ -20,9 +20,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
     @GetMapping("/all")
     public List<User> getAllUser(){
         return this.userService.findAllUsers();
@@ -39,7 +36,7 @@ public class UserController {
 
     @PostMapping()
     User createNewUser(@RequestBody User newUser){
-        return userService.createNewUser(newUser);
+        return userService.createNewUserWithEncryptAndScoreBoard(newUser);
     }
 
     @DeleteMapping("/{id}")

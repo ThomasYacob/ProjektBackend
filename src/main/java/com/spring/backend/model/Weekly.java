@@ -21,6 +21,6 @@ public class Weekly {
     private String question;
     @Column(name = "answer", nullable = false,length = 512)
     private String answer;
-    @Column(name = "dateToPublish",nullable = false)
+    @Column(name = "dateToPublish",nullable = true)
     private Date date;
 }

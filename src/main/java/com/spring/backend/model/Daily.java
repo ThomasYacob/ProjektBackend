@@ -24,7 +24,7 @@ public class Daily {
     private String alternative3;
     @Column(name = "rightAlternative", nullable = false)
     private int rightAlternative;
-    @Column(name = "dateToPublish",nullable = false)
+    @Column(name = "dateToPublish",nullable = true)
     private Date date;
 }
 

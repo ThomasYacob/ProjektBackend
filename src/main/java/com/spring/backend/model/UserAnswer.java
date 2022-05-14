@@ -1,6 +1,10 @@
 package com.spring.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -22,8 +26,10 @@ public class UserAnswer {
     private typeOfQuestion typeOfQuestion;
     @Column(name = "questionId")
     private int questionId;
-    @ManyToOne
-    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "user_id",nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private User user;
 
     public UserAnswer(String answer, Date date, com.spring.backend.model.typeOfQuestion typeOfQuestion, int questionId, User user) {

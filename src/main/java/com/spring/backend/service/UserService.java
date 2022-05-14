@@ -9,8 +9,12 @@ import com.spring.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
 @Service
+@Transactional
+
 public class UserService {
 
     private final UserRepository userRepository;
@@ -24,6 +28,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+
     public List<User> findAllUsers(){
         return this.userRepository.findAll();
     }
@@ -32,14 +37,13 @@ public class UserService {
         this.userRepository.findById(email).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
     }
 
-    public User createNewUser(User user){
+    public User createNewUserWithEncryptAndScoreBoard(User user){
         Scoreboard scoreboard = new Scoreboard(user);
         user.setPassword(encodePassword(user.getPassword()));
         this.userRepository.save(user);
         scoreBoardService.addScoreBoard(scoreboard);
         return user;
     }
-
     public User createNewUserWithoutPasswordAndScoreBoard(User user){
         return this.userRepository.save(user);
     }
@@ -61,17 +65,6 @@ public class UserService {
         return userRepository.save(updateUser);
     }
 
-    public User sendInAnswer(UserAnswer userAnswer){
-        User updateUser = userRepository.findById(userAnswer.getUser().getEmail()).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + userAnswer.getUser().getEmail()));
-        updateUser.getUserAnswers().add(userAnswer);
-        return userRepository.save(updateUser);
-    }
-
-    public User sendInAnswer(User updateUser, UserAnswer userAnswer){
-        updateUser.getUserAnswers().add(userAnswer);
-        return userRepository.save(updateUser);
-    }
-
     public User alterUserRole(String email, Role role) throws  ResourceNotFoundException{
         if (this.userRepository.findById(email).isPresent())
         {
@@ -81,7 +74,11 @@ public class UserService {
             return updatedUser;
         }
         else throw new ResourceNotFoundException("User not found");
-
     }
+
+    public boolean userExist(String email){
+        return this.userRepository.findById(email).isPresent();
+    }
+
 
 }

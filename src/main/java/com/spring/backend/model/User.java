@@ -2,7 +2,9 @@ package com.spring.backend.model;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -21,6 +23,8 @@ public class User {
     private String password;
     @Enumerated(EnumType.ORDINAL)
     private Role role;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
-    private Set<UserAnswer> userAnswers = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",orphanRemoval = true)
+    private List<UserAnswer> userAnswers = new ArrayList<>();
+
+
 }
