@@ -26,10 +26,10 @@ public class CheckHTTPResponse {
                 testRestTemplate.getForObject("http://localhost:8080"  + "/", String.class));
     }
 
-    @Test
-    public void testFindByUsername() {
-        String username = "hej";
-        User user = userRepository.findByUsername(username);
-        AssertionsForClassTypes.assertThat(user).isNotNull();
-    }
+//    @Test
+//    public void testFindByUsername() {
+//        String username = "hej";
+//        User user = userRepository.findByUsername(username);
+//        AssertionsForClassTypes.assertThat(user).isNotNull();
+//    }
 }

@@ -56,16 +56,16 @@ public class UserService {
         return userRepository.save(updateUser);
     }
 
-    public User alterUserRole(String email, Role role) throws  ResourceNotFoundException{
-        if (this.userRepository.findById(email).isPresent())
-        {
-            User userToBeChanged = userRepository.getById(email);
-            userToBeChanged.setRole(role);
-            User updatedUser = userRepository.save(userToBeChanged);
-            return updatedUser;
-        }
-        else throw new ResourceNotFoundException("User not found");
-
-    }
+//    public User alterUserRole(String email, Role role) throws  ResourceNotFoundException{
+//        if (this.userRepository.findById(email).isPresent())
+//        {
+//            User userToBeChanged = userRepository.getById(email);
+//            userToBeChanged.setRole(role);
+//            User updatedUser = userRepository.save(userToBeChanged);
+//            return updatedUser;
+//        }
+//        else throw new ResourceNotFoundException("User not found");
+//
+//    }
 
 }
