@@ -2,6 +2,9 @@ package com.spring.backend.model;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,13 +18,27 @@ uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")
 })
 public class User {
+//    @Id
+//    @Column(name = "email", nullable = false, length = 512,unique = true)
+//    private String email;
+//    @Column(name = "username", nullable = false, length = 512,unique = true)
+//    private String username;
+//    @Column(name = "password" ,nullable = false, length = 512)
+//    private String password;
     @Id
-    @Column(name = "email", nullable = false, length = 512,unique = true)
-    private String email;
-    @Column(name = "username", nullable = false, length = 512,unique = true)
+//    @NotBlank
+    @Size(max = 20)
     private String username;
-    @Column(name = "password" ,nullable = false, length = 512)
+
+//    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
+
+//    @NotBlank
+    @Size(max = 120)
     private String password;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
     joinColumns = @JoinColumn(name = "user_username"),

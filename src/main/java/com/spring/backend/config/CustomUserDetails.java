@@ -1,6 +1,5 @@
 package com.spring.backend.config;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.backend.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,7 +17,6 @@ public class CustomUserDetails implements UserDetails{
 
     private String username;
     private String email;
-    @JsonIgnore
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -54,12 +52,12 @@ public class CustomUserDetails implements UserDetails{
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return username;
     }
 
     public String getEmail() {
