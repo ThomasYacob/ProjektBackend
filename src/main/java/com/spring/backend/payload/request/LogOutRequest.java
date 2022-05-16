@@ -1,9 +1,9 @@
 package com.spring.backend.payload.request;
 
 public class LogOutRequest {
-    private String username;
+    private Long userId;
 
-    public String getUsername() {
-        return this.username;
+    public Long getUserId() {
+        return this.userId;
     }
 }

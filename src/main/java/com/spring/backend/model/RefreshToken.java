@@ -7,10 +7,13 @@ import java.time.Instant;
 public class RefreshToken {
 
     @Id
-    private String username;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+//    private String username;
 
+//    @JoinColumn(name = "user_username", referencedColumnName = "username")
     @OneToOne
-    @JoinColumn(name = "user_username", referencedColumnName = "username")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @Column(nullable = false, unique = true)
@@ -22,12 +25,20 @@ public class RefreshToken {
     public RefreshToken() {
     }
 
-    public String getUsername() {
-        return username;
+//    public String getUsername() {
+//        return username;
+//    }
+
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
+
+    public long getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public User getUser() {

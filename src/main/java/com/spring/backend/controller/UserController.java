@@ -66,14 +66,14 @@ public class UserController {
         return this.userService.findAllUsers();
     }
 
-    @GetMapping("/{id}")
-    User getUserByMail(@PathVariable String id)throws ResponseStatusException {
-        try{
-            return this.userService.getUser(id);
-        }catch (ResourceNotFoundException e){
-            throw new ResourceNotFoundException("User not found");
-        }
-    }
+//    @GetMapping("/{id}")
+//    User getUserByMail(@PathVariable String id)throws ResponseStatusException {
+//        try{
+//            return this.userService.getUser(id);
+//        }catch (ResourceNotFoundException e){
+//            throw new ResourceNotFoundException("User not found");
+//        }
+//    }
 
 //    @PostMapping()
 //    User createNewUser(@RequestBody User newUser){
@@ -126,23 +126,23 @@ public class UserController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @DeleteMapping("/{id}")
-    void deleteUser(@PathVariable String id){
-        try{
-            this.userService.deleteUser(id);
-        }catch (ResourceNotFoundException e){
-            throw new ResourceNotFoundException("User not found");
-        }
-    }
+//    @DeleteMapping("/{id}")
+//    void deleteUser(@PathVariable String id){
+//        try{
+//            this.userService.deleteUser(id);
+//        }catch (ResourceNotFoundException e){
+//            throw new ResourceNotFoundException("User not found");
+//        }
+//    }
 
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable String id,@RequestBody User userdetails){
-        try {
-            return this.userService.updateUser(id,userdetails);
-        }catch (ResourceNotFoundException e){
-            throw new ResourceNotFoundException("User not found");
-        }
-    }
+//    @PutMapping("/{id}")
+//    public User updateUser(@PathVariable String id,@RequestBody User userdetails){
+//        try {
+//            return this.userService.updateUser(id,userdetails);
+//        }catch (ResourceNotFoundException e){
+//            throw new ResourceNotFoundException("User not found");
+//        }
+//    }
 
 //    @GetMapping("/login")
 //    public ResponseEntity<String> logging() {
@@ -163,10 +163,10 @@ public class UserController {
         List<String> roles = customUserDetails.getAuthorities().stream().map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        RefreshToken refreshToken = refreshTokenService.createRefreshToken(customUserDetails.getUsername());
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(customUserDetails.getId());
 
-        return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), customUserDetails.getUsername(),
-                customUserDetails.getEmail(), roles));
+        return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), customUserDetails.getId(),
+                customUserDetails.getUsername(), customUserDetails.getEmail(), roles));
     }
 
 //    @PutMapping("changeRole/{id}")

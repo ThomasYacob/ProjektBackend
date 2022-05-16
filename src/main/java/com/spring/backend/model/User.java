@@ -27,6 +27,9 @@ public class User {
 //    private String password;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Size(max = 20)
     private String username;
 
@@ -49,6 +52,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {

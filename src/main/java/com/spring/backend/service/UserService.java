@@ -27,9 +27,9 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public void deleteUser(String email) throws ResourceNotFoundException{
-        this.userRepository.findById(email).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
-    }
+//    public void deleteUser(String email) throws ResourceNotFoundException{
+//        this.userRepository.findById(email).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
+//    }
 
     public User createNewUser(User user){
         Scoreboard scoreboard = new Scoreboard(user);
@@ -39,22 +39,22 @@ public class UserService {
         return user;
     }
 
-    public User getUser(String email) throws  ResourceNotFoundException{
-        return userRepository.findById(email).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
-    }
+//    public User getUser(String email) throws  ResourceNotFoundException{
+//        return userRepository.findById(email).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
+//    }
 
     private String encodePassword(String password) {
         return passwordEncoder.encode(password);
     }
 
-    public User updateUser(String email,User userDetails){
-        User updateUser = userRepository.findById(email).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
-        updateUser.setUsername(userDetails.getUsername());
-        updateUser.setPassword(userDetails.getPassword());
-        updateUser.setEmail(userDetails.getEmail());
-        //updateUser.setRole(userDetails.getRole());
-        return userRepository.save(updateUser);
-    }
+//    public User updateUser(String email,User userDetails){
+//        User updateUser = userRepository.findById(email).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
+//        updateUser.setUsername(userDetails.getUsername());
+//        updateUser.setPassword(userDetails.getPassword());
+//        updateUser.setEmail(userDetails.getEmail());
+//        //updateUser.setRole(userDetails.getRole());
+//        return userRepository.save(updateUser);
+//    }
 
 //    public User alterUserRole(String email, Role role) throws  ResourceNotFoundException{
 //        if (this.userRepository.findById(email).isPresent())
