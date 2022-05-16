@@ -25,8 +25,8 @@ public class User {
 //    private String username;
 //    @Column(name = "password" ,nullable = false, length = 512)
 //    private String password;
+
     @Id
-//    @NotBlank
     @Size(max = 20)
     private String username;
 

@@ -3,10 +3,10 @@ package com.spring.backend.model;
 import javax.persistence.*;
 import java.time.Instant;
 
-@Entity
+@Entity(name = "refreshtoken")
 public class RefreshToken {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String username;
 
     @OneToOne
