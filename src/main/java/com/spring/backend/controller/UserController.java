@@ -144,11 +144,6 @@ public class UserController {
 //        }
 //    }
 
-//    @GetMapping("/login")
-//    public ResponseEntity<String> logging() {
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
     @PostMapping("/login")
     public ResponseEntity<?> logging(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
