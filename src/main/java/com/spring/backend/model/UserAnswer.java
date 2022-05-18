@@ -26,6 +26,8 @@ public class UserAnswer {
     private typeOfQuestion typeOfQuestion;
     @Column(name = "questionId")
     private int questionId;
+    @Column(name = "corrected")
+    private String corrected;
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "user_id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

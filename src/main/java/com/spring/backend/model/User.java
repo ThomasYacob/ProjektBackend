@@ -2,6 +2,7 @@ package com.spring.backend.model;
 
 import lombok.*;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "user")
-public class User {
+public class User  {
     @Id
     @Column(name = "email", nullable = false, length = 512,unique = true)
     private String email;

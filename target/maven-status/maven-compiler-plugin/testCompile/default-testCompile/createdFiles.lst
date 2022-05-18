@@ -1,0 +1,5 @@
+com/spring/backend/controller/DailyControllerTest.class
+com/spring/backend/controller/WeeklyControllerTest.class
+com/spring/backend/service/UserServiceTest.class
+com/spring/backend/controller/MonthlyControllerTest.class
+com/spring/backend/controller/ScoreBoardControllerTest.class

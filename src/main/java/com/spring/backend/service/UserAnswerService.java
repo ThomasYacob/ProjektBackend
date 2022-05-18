@@ -50,7 +50,7 @@ public class UserAnswerService {
         userAnswer.setUser(user);
         if(userAnswer.getTypeOfQuestion()== typeOfQuestion.Daily){
             if(dailyService.getDaily(userAnswer.getQuestionId()).getRightAlternative() == Integer.parseInt(userAnswer.getAnswer())){
-                scoreBoardService.modifyScoreBoardDaily(user,1);
+                scoreBoardService.modifyScoreBoardDaily(email,1);
             }
         }
         return userAnswerRepository.save(userAnswer);

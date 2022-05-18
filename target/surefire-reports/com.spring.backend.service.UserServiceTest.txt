@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.spring.backend.service.UserServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! - in com.spring.backend.service.UserServiceTest
+testAddUser  Time elapsed: 0 s  <<< ERROR!
+com.spring.backend.exceptions.ResourceNotFoundException: User not exist with id: Redve@kth.se
+	at com.spring.backend.service.UserServiceTest.testAddUser(UserServiceTest.java:70)
+

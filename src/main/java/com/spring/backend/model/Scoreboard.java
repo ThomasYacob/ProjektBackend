@@ -2,12 +2,13 @@ package com.spring.backend.model;
 
 import lombok.*;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Scoreboard {
+public class Scoreboard implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "scoreID")
@@ -18,6 +19,7 @@ public class Scoreboard {
     private int weeklyScore;
     @Column(name = "monthlyScore")
     private int monthlyScore;
+
     @OneToOne
     @JoinColumn(name = "email",unique = true)
     private User user;

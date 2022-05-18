@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ScoreBoardService {
 
-    private ScoreboardRepository scoreboardRepository;
-
+    private final ScoreboardRepository scoreboardRepository;
 
     @Autowired
     public ScoreBoardService(ScoreboardRepository scoreboardRepository) {
@@ -22,36 +21,42 @@ public class ScoreBoardService {
         return scoreboardRepository.save(scoreboard);
     }
 
-    public Scoreboard modifyScoreBoardDaily(User user,int dailypoints) throws ResourceNotFoundException{
-        if(scoreboardRepository.findById(user).isPresent()){
-           Scoreboard temp = scoreboardRepository.getById(user);
-           temp.setDailyScore(temp.getDailyScore()+dailypoints);
+    public Scoreboard modifyScoreBoardDaily(String email,int dailyPoints) throws ResourceNotFoundException{
+        User user = scoreboardRepository.findByEmail(email);
+        if(user != null){
+           Scoreboard temp = scoreboardRepository.findScoreboardByUser(user);
+           temp.setDailyScore(temp.getDailyScore()+dailyPoints);
            return scoreboardRepository.save(temp);
         }
         throw new ResourceNotFoundException();
     }
 
-    public Scoreboard modifyScoreBoardWeekly(User user,int weeklypoints) throws ResourceNotFoundException{
-        if(scoreboardRepository.findById(user).isPresent()){
-            Scoreboard temp = scoreboardRepository.getById(user);
-            temp.setWeeklyScore(temp.getWeeklyScore()+weeklypoints);
+    public Scoreboard modifyScoreBoardWeekly(String email,int weeklyPoints) throws ResourceNotFoundException{
+        User user = scoreboardRepository.findByEmail(email);
+        if(user != null){
+            Scoreboard temp = scoreboardRepository.findScoreboardByUser(user);
+            temp.setWeeklyScore(temp.getWeeklyScore()+weeklyPoints);
             return scoreboardRepository.save(temp);
         }
         throw new ResourceNotFoundException();
     }
 
-    public Scoreboard modifyScoreBoardMonthly(User user, int monthlyPoints) throws ResourceNotFoundException{
-        if(scoreboardRepository.findById(user).isPresent()){
-            Scoreboard temp = scoreboardRepository.getById(user);
+    public Scoreboard modifyScoreBoardMonthly(String email, int monthlyPoints) throws ResourceNotFoundException{
+        User user = scoreboardRepository.findByEmail(email);
+        if(user != null){
+            Scoreboard temp = scoreboardRepository.findScoreboardByUser(user);
             temp.setMonthlyScore(temp.getMonthlyScore()+monthlyPoints);
             return scoreboardRepository.save(temp);
         }
         throw new ResourceNotFoundException();
     }
 
-    public Scoreboard getScoreForUser(User user) throws ResourceNotFoundException {
-        if(scoreboardRepository.findById(user).isPresent()){
-            return scoreboardRepository.getById(user);
+
+
+    public Scoreboard getScoreForUser(String email) throws ResourceNotFoundException {
+        User user = scoreboardRepository.findByEmail(email);
+        if(user != null){
+            return scoreboardRepository.findScoreboardByUser(user);
         }
         throw new ResourceNotFoundException();
     }
