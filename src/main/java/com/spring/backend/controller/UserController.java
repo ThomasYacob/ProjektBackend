@@ -29,6 +29,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
@@ -61,24 +62,25 @@ public class UserController {
     @Autowired
     RefreshTokenService refreshTokenService;
 
+    @PostConstruct
+    public void initRole() {
+        userService.initRole();
+    }
+
     @GetMapping("/all")
     public List<User> getAllUser(){
         return this.userService.findAllUsers();
     }
 
-//    @GetMapping("/{id}")
-//    User getUserByMail(@PathVariable String id)throws ResponseStatusException {
-//        try{
-//            return this.userService.getUser(id);
-//        }catch (ResourceNotFoundException e){
-//            throw new ResourceNotFoundException("User not found");
-//        }
-//    }
+    @GetMapping("/{id}")
+    User getUserByMail(@PathVariable String id)throws ResponseStatusException {
+        try{
+            return this.userService.getUser(id);
+        }catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("User not found");
+        }
+    }
 
-//    @PostMapping()
-//    User createNewUser(@RequestBody User newUser){
-//        return userService.createNewUser(newUser);
-//    }
     @PostMapping()
     public ResponseEntity<?> createNewUser(@Valid @RequestBody SignupRequest signupRequest) {
         if (userRepository.existsByUsername(signupRequest.getUsername())) {
@@ -126,23 +128,23 @@ public class UserController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-//    @DeleteMapping("/{id}")
-//    void deleteUser(@PathVariable String id){
-//        try{
-//            this.userService.deleteUser(id);
-//        }catch (ResourceNotFoundException e){
-//            throw new ResourceNotFoundException("User not found");
-//        }
-//    }
+    @DeleteMapping("/{id}")
+    void deleteUser(@PathVariable String id){
+        try{
+            this.userService.deleteUser(id);
+        }catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("User not found");
+        }
+    }
 
-//    @PutMapping("/{id}")
-//    public User updateUser(@PathVariable String id,@RequestBody User userdetails){
-//        try {
-//            return this.userService.updateUser(id,userdetails);
-//        }catch (ResourceNotFoundException e){
-//            throw new ResourceNotFoundException("User not found");
-//        }
-//    }
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable String id,@RequestBody User userdetails){
+        try {
+            return this.userService.updateUser(id,userdetails);
+        }catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("User not found");
+        }
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> logging(@Valid @RequestBody LoginRequest loginRequest) {
@@ -164,14 +166,14 @@ public class UserController {
                 customUserDetails.getUsername(), customUserDetails.getEmail(), roles));
     }
 
-//    @PutMapping("changeRole/{id}")
-//    User changeRoleUser(@PathVariable String id,@RequestBody Role role){
-//        try{
-//            return this.userService.alterUserRole(id,role);
-//        }catch (ResourceNotFoundException e){
-//            throw new ResourceNotFoundException("User not found");
-//        }
-//    }
+    @PutMapping("changeRole/{id}")
+    User changeRoleUser(@PathVariable String id,@RequestBody Role role){
+        try{
+            return this.userService.alterUserRole(id,role);
+        }catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("User not found");
+        }
+    }
 
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
