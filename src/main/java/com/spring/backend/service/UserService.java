@@ -59,16 +59,16 @@ public class UserService {
         return user;
     }
 
-    public User getUser(String email) throws  ResourceNotFoundException{
-        return userRepository.findById(Long.valueOf(email)).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
+    public User getUser(String username) throws  ResourceNotFoundException{
+        return userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + username));
     }
 
     private String encodePassword(String password) {
         return passwordEncoder.encode(password);
     }
 
-    public User updateUser(String email,User userDetails){
-        User updateUser = userRepository.findById(Long.valueOf(email)).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
+    public User updateUser(String username, User userDetails){
+        User updateUser = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + username));
         updateUser.setUsername(userDetails.getUsername());
         updateUser.setPassword(userDetails.getPassword());
         updateUser.setEmail(userDetails.getEmail());
