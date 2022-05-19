@@ -19,22 +19,22 @@ public class UserService {
     private final ScoreBoardService scoreBoardService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    private RoleDao roleDao;
+//    @Autowired
+//    private RoleDao roleDao;
 
-    public void initRole() {
-        Role userRole = new Role();
-        userRole.setName("User");
-        roleDao.save(userRole);
-
-        Role contentCreatorRole = new Role();
-        contentCreatorRole.setName("ContentCreator");
-        roleDao.save(contentCreatorRole);
-
-        Role adminRole = new Role();
-        adminRole.setName("Admin");
-        roleDao.save(adminRole);
-    }
+//    public void initRole() {
+//        Role userRole = new Role();
+//        userRole.setName("User");
+//        roleDao.save(userRole);
+//
+//        Role contentCreatorRole = new Role();
+//        contentCreatorRole.setName("ContentCreator");
+//        roleDao.save(contentCreatorRole);
+//
+//        Role adminRole = new Role();
+//        adminRole.setName("Admin");
+//        roleDao.save(adminRole);
+//    }
 
     @Autowired
     public UserService(UserRepository userRepository,ScoreBoardService scoreBoardService,BCryptPasswordEncoder passwordEncoder){

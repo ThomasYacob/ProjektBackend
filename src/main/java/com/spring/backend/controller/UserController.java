@@ -61,11 +61,11 @@ public class UserController {
 
     @Autowired
     RefreshTokenService refreshTokenService;
-
-    @PostConstruct
-    public void initRole() {
-        userService.initRole();
-    }
+//
+//    @PostConstruct
+//    public void initRole() {
+//        userService.initRole();
+//    }
 
     @GetMapping("/all")
     public List<User> getAllUser(){
