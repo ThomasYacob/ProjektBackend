@@ -5,7 +5,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -47,6 +49,9 @@ public class User {
     joinColumns = @JoinColumn(name = "user_username"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",orphanRemoval = true)
+    private List<UserAnswer> userAnswers = new ArrayList<>();
 
     public User(String username, String email, String password) {
         this.username = username;
