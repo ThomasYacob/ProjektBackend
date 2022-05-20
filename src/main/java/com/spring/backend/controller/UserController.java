@@ -98,7 +98,7 @@ public class UserController {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.Admin)
+            Role userRole = roleRepository.findByName(ERole.User)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
@@ -129,18 +129,19 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    void deleteUser(@PathVariable String id){
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id){
         try{
             this.userService.deleteUser(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (ResourceNotFoundException e){
             throw new ResourceNotFoundException("User not found");
         }
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable String id,@RequestBody User userdetails){
+    public User updateUser(@PathVariable Long id,@RequestBody User userDetails){
         try {
-            return this.userService.updateUser(id,userdetails);
+            return this.userService.updateUser(id, userDetails);
         }catch (ResourceNotFoundException e){
             throw new ResourceNotFoundException("User not found");
         }

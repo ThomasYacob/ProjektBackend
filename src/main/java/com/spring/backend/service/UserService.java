@@ -47,8 +47,8 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public void deleteUser(String email) throws ResourceNotFoundException{
-        this.userRepository.findById(Long.valueOf(email)).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
+    public void deleteUser(Long email) throws ResourceNotFoundException{
+        this.userRepository.findById(email).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + email));
     }
 
     public User createNewUser(User user){
@@ -67,8 +67,8 @@ public class UserService {
         return passwordEncoder.encode(password);
     }
 
-    public User updateUser(String username, User userDetails){
-        User updateUser = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + username));
+    public User updateUser(Long username, User userDetails){
+        User updateUser = userRepository.findById(username).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + username));
         updateUser.setUsername(userDetails.getUsername());
         updateUser.setPassword(userDetails.getPassword());
         updateUser.setEmail(userDetails.getEmail());
