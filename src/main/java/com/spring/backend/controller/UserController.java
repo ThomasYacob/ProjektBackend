@@ -66,125 +66,67 @@ public class UserController {
         return this.userService.findAllUsers();
     }
 
-//    @GetMapping("/{id}")
-//    User getUserByMail(@PathVariable String id)throws ResponseStatusException {
-//        try{
-//            return this.userService.getUser(id);
-//        }catch (ResourceNotFoundException e){
-//            throw new ResourceNotFoundException("User not found");
-//        }
-//    }
-
-//    @PostMapping()
-//    User createNewUser(@RequestBody User newUser){
-//        return userService.createNewUser(newUser);
-//    }
-    @PostMapping()
-    public ResponseEntity<?> createNewUser(@Valid @RequestBody SignupRequest signupRequest) {
-        if (userRepository.existsByUsername(signupRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+    @GetMapping("/{id}")
+    User getUserByMail(@PathVariable Long id)throws ResponseStatusException {
+        try {
+            return this.userService.getUser(id);
+        } catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("User not found");
         }
-
-        if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
-        }
-
-        User user = new User(signupRequest.getUsername(), signupRequest.getEmail(),
-                passwordEncoder.encode(signupRequest.getPassword()));
-
-        Set<String> strRoles = signupRequest.getRole();
-        Set<Role> roles = new HashSet<>();
-
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.Admin)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.Admin)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-
-                        break;
-                    case "mod":
-                        Role modRole = roleRepository.findByName(ERole.ContentCreator)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
-
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.User)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
-        }
-        user.setRoles(roles);
-        userRepository.save(user);
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-//    @DeleteMapping("/{id}")
-//    void deleteUser(@PathVariable String id){
-//        try{
-//            this.userService.deleteUser(id);
-//        }catch (ResourceNotFoundException e){
-//            throw new ResourceNotFoundException("User not found");
-//        }
-//    }
+    @PostMapping()
+    public ResponseEntity<?> createNewUser(@RequestBody SignupRequest user) {
+        try {
+            return userService.createNewUser(user);
+        } catch (ResourceNotFoundException e) {
+            throw new ResourceNotFoundException("User not found");
+        }
+    }
 
-//    @PutMapping("/{id}")
-//    public User updateUser(@PathVariable String id,@RequestBody User userdetails){
-//        try {
-//            return this.userService.updateUser(id,userdetails);
-//        }catch (ResourceNotFoundException e){
-//            throw new ResourceNotFoundException("User not found");
-//        }
-//    }
+    @DeleteMapping("/{id}")
+    void deleteUser(@PathVariable Long id){
+        try {
+            this.userService.deleteUser(id);
+        } catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("User not found");
+        }
+    }
+
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id,@RequestBody User userdetails){
+        try {
+            return this.userService.updateUser(id, userdetails);
+        } catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("User not found");
+        }
+    }
 
     @PostMapping("/login")
-    public ResponseEntity<?> logging(@Valid @RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+    public ResponseEntity<?> logging(@RequestBody LoginRequest loginRequest) {
+        try {
+            return userService.logging(loginRequest);
+        } catch (ResourceNotFoundException e) {
+            throw new ResourceNotFoundException("User not found");
+        }
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-
-        String jwt = jwtUtils.generateJwtToken(customUserDetails);
-
-        List<String> roles = customUserDetails.getAuthorities().stream().map(item -> item.getAuthority())
-                .collect(Collectors.toList());
-
-        RefreshToken refreshToken = refreshTokenService.createRefreshToken(customUserDetails.getId());
-
-        return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), customUserDetails.getId(),
-                customUserDetails.getUsername(), customUserDetails.getEmail(), roles));
     }
 
-//    @PutMapping("changeRole/{id}")
-//    User changeRoleUser(@PathVariable String id,@RequestBody Role role){
-//        try{
-//            return this.userService.alterUserRole(id,role);
-//        }catch (ResourceNotFoundException e){
-//            throw new ResourceNotFoundException("User not found");
-//        }
-//    }
+    @PutMapping("changeRole/{id}")
+    User changeRoleUser(@PathVariable Long id,@RequestBody Role role){
+        try {
+            return this.userService.alterUserRole(id, role);
+        } catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("User not found");
+        }
+    }
 
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
-        String requestRefreshToken = request.getRefreshToken();
-
-        return refreshTokenService.findByToken(requestRefreshToken)
-                .map(refreshTokenService::verifyExpiration)
-                .map(RefreshToken::getUser)
-                .map(user -> {
-                    String token = jwtUtils.generateTokenFromUsername(user.getUsername());
-                    return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));
-                })
-                .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,
-                        "Refresh token is not in database!"));
+//        try {
+            return this.userService.refreshToken(request);
+//        } catch (TokenRefreshException e) {
+//            throw new TokenRefreshException(e, "Refresh token is not in database!");
+//        }
     }
 }
