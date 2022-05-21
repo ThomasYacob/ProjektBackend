@@ -35,11 +35,11 @@ public class UserAnswerService {
         this.userService = userService;
     }
 
-    public Set<UserAnswer> getUserAnswers(String email){
-        User user = userAnswerRepository.findUser(email);
+    public Set<UserAnswer> getUserAnswers(Long id){
+        User user = userAnswerRepository.findUser(id);
         if (user != null){
-            if(!userAnswerRepository.findUserAnswerByUsername(email).isEmpty()){
-                return userAnswerRepository.findUserAnswerByUsername(email);
+            if(!userAnswerRepository.findUserAnswerByUsername(id).isEmpty()){
+                return userAnswerRepository.findUserAnswerByUsername(id);
             }
             else throw new ResourceNotFoundException("Answers not found");
         }
@@ -52,12 +52,12 @@ public class UserAnswerService {
     }
 
 
-    public UserAnswer setUserAnswer(String email,UserAnswer userAnswer){
-        User user = userAnswerRepository.findUser(email);
+    public UserAnswer setUserAnswer(Long id, UserAnswer userAnswer){
+        User user = userAnswerRepository.findUser(id);
         userAnswer.setUser(user);
         if(userAnswer.getTypeOfQuestion()== typeOfQuestion.Daily){
             if(dailyService.getDaily(userAnswer.getQuestionId()).getRightAlternative() == Integer.parseInt(userAnswer.getAnswer())){
-                scoreBoardService.modifyScoreBoardDaily(email,1);
+                scoreBoardService.modifyScoreBoardDaily(id,1);
             }
         }
         return userAnswerRepository.save(userAnswer);

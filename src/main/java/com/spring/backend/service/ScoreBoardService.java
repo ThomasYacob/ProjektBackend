@@ -23,8 +23,8 @@ public class ScoreBoardService {
         return scoreboardRepository.save(scoreboard);
     }
 
-    public Scoreboard modifyScoreBoardDaily(String email,int dailyPoints) throws ResourceNotFoundException {
-        User user = scoreboardRepository.findByEmail(email);
+    public Scoreboard modifyScoreBoardDaily(Long id,int dailyPoints) throws ResourceNotFoundException {
+        User user = scoreboardRepository.findByIdUser(id);
         if(user != null){
             Scoreboard temp = scoreboardRepository.findScoreboardByUser(user);
             temp.setDailyScore(temp.getDailyScore()+dailyPoints);
@@ -59,8 +59,8 @@ public class ScoreBoardService {
     }
 
 
-    public Scoreboard getScoreForUser(String email) throws ResourceNotFoundException {
-        User user = scoreboardRepository.findByEmail(email);
+    public Scoreboard getScoreForUser(Long id) throws ResourceNotFoundException {
+        User user = scoreboardRepository.findByIdUser(id);
         if(user != null){
             return scoreboardRepository.findScoreboardByUser(user);
         }

@@ -33,9 +33,9 @@ public class UserAnswerController {
         return userAnswerService.getAll();
     }
 
-    @PostMapping("/user/{userid}/userAnswers")
-    public UserAnswer setAnswer(@PathVariable(value = "userid") String email,@RequestBody UserAnswer userAnswer){
-        return userAnswerService.setUserAnswer(email,userAnswer);
+    @PostMapping("/user/{id}/userAnswers")
+    public UserAnswer setAnswer(@PathVariable(value = "id") Long id,@RequestBody UserAnswer userAnswer){
+        return userAnswerService.setUserAnswer(id,userAnswer);
     }
 
 

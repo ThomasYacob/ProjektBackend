@@ -13,7 +13,7 @@ public class Daily {
     @Id
     @GeneratedValue
     @Column(name = "dailyID")
-    private int id;
+    private Long id;
     @Column(name = "question",nullable = false,length = 512)
     private String question;
     @Column(name = "alternative1", nullable = false,length = 512)

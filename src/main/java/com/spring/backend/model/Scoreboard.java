@@ -11,7 +11,7 @@ public class  Scoreboard {
     @Id
     @GeneratedValue
     @Column(name = "scoreID")
-    private int id;
+    private Long id;
     @Column(name = "dailyScore")
     private int dailyScore;
     @Column(name = "weeklyScore")

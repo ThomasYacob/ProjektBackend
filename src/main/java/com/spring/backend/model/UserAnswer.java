@@ -25,7 +25,7 @@ public class UserAnswer {
     @Enumerated(EnumType.STRING)
     private typeOfQuestion typeOfQuestion;
     @Column(name = "questionId")
-    private int questionId;
+    private Long questionId;
     @Column(name = "corrected")
     private String corrected;
     @ManyToOne(fetch = FetchType.LAZY,optional = false)

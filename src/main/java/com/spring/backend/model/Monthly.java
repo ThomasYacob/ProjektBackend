@@ -13,7 +13,7 @@ public class Monthly {
     @Id
     @GeneratedValue
     @Column(name = "monthlyID")
-    private int id;
+    private Long id;
     @Column(name = "question",nullable = false,length = 512)
     private String question;
     @Column(name = "answer", nullable = false,length = 512)
