@@ -28,6 +28,11 @@ public class UserAnswerController {
         return userAnswerService.getUserAnswers(email);
     }
 
+    @GetMapping("/user/userAnswers")
+    public List<UserAnswer> getAll(){
+        return userAnswerService.getAll();
+    }
+
     @PostMapping("/user/{userid}/userAnswers")
     public UserAnswer setAnswer(@PathVariable(value = "userid") String email,@RequestBody UserAnswer userAnswer){
         return userAnswerService.setUserAnswer(email,userAnswer);

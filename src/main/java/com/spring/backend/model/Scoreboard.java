@@ -7,7 +7,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Scoreboard {
+public class  Scoreboard {
     @Id
     @GeneratedValue
     @Column(name = "scoreID")
