@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -60,6 +61,8 @@ public class UserAnswerService {
                 scoreBoardService.modifyScoreBoardDaily(id,1);
             }
         }
+        long millis = System.currentTimeMillis();
+        userAnswer.setDate(new Date(millis));
         return userAnswerRepository.save(userAnswer);
     }
 

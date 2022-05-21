@@ -19,7 +19,7 @@ public class  Scoreboard {
     @Column(name = "monthlyScore")
     private int monthlyScore;
     @OneToOne
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "userId")
     private User user;
 
     public Scoreboard(User user) {

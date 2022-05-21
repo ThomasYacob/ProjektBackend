@@ -20,7 +20,7 @@ public class UserAnswer {
     private long id;
     @Column(name = "answer",nullable = false)
     private String answer;
-    @Column(name = "dateSubmited",nullable = false)
+    @Column(name = "dateSubmited",nullable = true)
     private Date date;
     @Enumerated(EnumType.STRING)
     private typeOfQuestion typeOfQuestion;
