@@ -7,6 +7,8 @@ import com.spring.backend.repository.ScoreboardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ScoreBoardService {
 
@@ -51,6 +53,10 @@ public class ScoreBoardService {
         throw new ResourceNotFoundException();
     }
 
+
+    public List<Scoreboard> getAllScoreBoard(){
+        return this.scoreboardRepository.findAll();
+    }
 
 
     public Scoreboard getScoreForUser(String email) throws ResourceNotFoundException {
