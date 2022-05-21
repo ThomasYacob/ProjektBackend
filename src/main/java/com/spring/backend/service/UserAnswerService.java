@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -45,6 +46,11 @@ public class UserAnswerService {
         else throw new ResourceNotFoundException("User not found");
 
     }
+
+    public List<UserAnswer> getAll(){
+        return this.userAnswerRepository.findAll();
+    }
+
 
     public UserAnswer setUserAnswer(String email,UserAnswer userAnswer){
         User user = userAnswerRepository.findUser(email);
