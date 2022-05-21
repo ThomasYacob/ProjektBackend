@@ -14,7 +14,7 @@ import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
-@RequestMapping("api")
+@RequestMapping("/api")
 
 public class UserAnswerController {
 
