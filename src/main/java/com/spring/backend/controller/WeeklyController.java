@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
-@RequestMapping("api/weekly")
+@RequestMapping("/api/weekly")
 public class WeeklyController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class WeeklyController {
     }
 
     @GetMapping("{id}")
-    Weekly getWeeklyById(@PathVariable int id){
+    Weekly getWeeklyById(@PathVariable Long id){
         try {
             return this.weeklyService.getWeekly(id);
         }catch (ResourceNotFoundException e){
@@ -37,7 +37,7 @@ public class WeeklyController {
     }
 
     @DeleteMapping("{id}")
-    void deleteWeekly(@PathVariable int id){
+    void deleteWeekly(@PathVariable Long id){
         try{
             this.weeklyService.deleteWeekly(id);
         }catch (ResourceNotFoundException e){

@@ -33,8 +33,8 @@ public class ScoreBoardService {
         throw new ResourceNotFoundException();
     }
 
-    public Scoreboard modifyScoreBoardWeekly(String email,int weeklyPoints) throws ResourceNotFoundException{
-        User user = scoreboardRepository.findByEmail(email);
+    public Scoreboard modifyScoreBoardWeekly(Long id, int weeklyPoints) throws ResourceNotFoundException{
+        User user = scoreboardRepository.findByIdUser(id);
         if(user != null){
             Scoreboard temp = scoreboardRepository.findScoreboardByUser(user);
             temp.setWeeklyScore(temp.getWeeklyScore()+weeklyPoints);
@@ -43,8 +43,8 @@ public class ScoreBoardService {
         throw new ResourceNotFoundException();
     }
 
-    public Scoreboard modifyScoreBoardMonthly(String email, int monthlyPoints) throws ResourceNotFoundException{
-        User user = scoreboardRepository.findByEmail(email);
+    public Scoreboard modifyScoreBoardMonthly(Long id, int monthlyPoints) throws ResourceNotFoundException{
+        User user = scoreboardRepository.findByIdUser(id);
         if(user != null){
             Scoreboard temp = scoreboardRepository.findScoreboardByUser(user);
             temp.setMonthlyScore(temp.getMonthlyScore()+monthlyPoints);

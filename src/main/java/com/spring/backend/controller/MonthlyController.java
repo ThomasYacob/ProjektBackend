@@ -22,7 +22,7 @@ public class MonthlyController {
     }
 
     @GetMapping("{id}")
-    Monthly getMonthlyById(@PathVariable int id){
+    Monthly getMonthlyById(@PathVariable Long id){
         try {
             return this.monthlyService.getMonthly(id);
         }catch (ResourceNotFoundException e){
@@ -36,7 +36,7 @@ public class MonthlyController {
     }
 
     @DeleteMapping("{id}")
-    void deleteMonthly(@PathVariable int id){
+    void deleteMonthly(@PathVariable Long id){
         try{
             this.monthlyService.deleteMonthly(id);
         }catch (ResourceNotFoundException e){

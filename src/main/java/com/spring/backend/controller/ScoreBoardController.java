@@ -20,9 +20,9 @@ public class ScoreBoardController {
         return this.scoreBoardService.getAllScoreBoard();
     }
 
-    @GetMapping("{userid}")
-    public Scoreboard getUserScoreboard(@PathVariable String userid){
-        return scoreBoardService.getScoreForUser(userid);
+    @GetMapping("{id}")
+    public Scoreboard getUserScoreboard(@PathVariable Long id){
+        return scoreBoardService.getScoreForUser(id);
     }
 
 }

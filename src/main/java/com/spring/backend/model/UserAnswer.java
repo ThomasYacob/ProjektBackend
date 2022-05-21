@@ -34,7 +34,7 @@ public class UserAnswer {
     @JsonIgnore
     private User user;
 
-    public UserAnswer(String answer, Date date, com.spring.backend.model.typeOfQuestion typeOfQuestion, int questionId, User user) {
+    public UserAnswer(String answer, Date date, com.spring.backend.model.typeOfQuestion typeOfQuestion, Long questionId, User user) {
         this.answer = answer;
         this.date = date;
         this.typeOfQuestion = typeOfQuestion;
@@ -42,7 +42,7 @@ public class UserAnswer {
         this.user = user;
     }
 
-    public UserAnswer(String answer, Date date, com.spring.backend.model.typeOfQuestion typeOfQuestion, int questionId) {
+    public UserAnswer(String answer, Date date, com.spring.backend.model.typeOfQuestion typeOfQuestion, Long questionId) {
         this.answer = answer;
         this.date = date;
         this.typeOfQuestion = typeOfQuestion;

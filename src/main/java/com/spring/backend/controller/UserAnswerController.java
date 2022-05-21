@@ -23,9 +23,9 @@ public class UserAnswerController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user/{userid}/userAnswers")
-    public Set<UserAnswer> getAnswers(@PathVariable(value = "userid") String email){
-        return userAnswerService.getUserAnswers(email);
+    @GetMapping("/user/{id}/userAnswers")
+    public Set<UserAnswer> getAnswers(@PathVariable(value = "id") Long id){
+        return userAnswerService.getUserAnswers(id);
     }
 
     @GetMapping("/user/userAnswers")

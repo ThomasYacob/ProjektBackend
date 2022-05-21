@@ -21,13 +21,13 @@ public class WeeklyService {
         return this.weeklyRepository.save(weekly);
     }
 
-    public Weekly getWeekly(int id) throws ResourceNotFoundException {
+    public Weekly getWeekly(Long id) throws ResourceNotFoundException {
         if(this.weeklyRepository.findById(id).isPresent()){
             return this.weeklyRepository.getById(id);
         }
         else throw new ResourceNotFoundException("Weekly not found");
     }
-    public void deleteWeekly(int id) throws ResourceNotFoundException{
+    public void deleteWeekly(Long id) throws ResourceNotFoundException{
         if(this.weeklyRepository.findById(id).isPresent()){
             this.weeklyRepository.deleteById(id);
         }
