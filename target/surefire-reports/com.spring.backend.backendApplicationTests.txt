@@ -1,4 +1,9 @@
 -------------------------------------------------------------------------------
 Test set: com.spring.backend.backendApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.171 s - in com.spring.backend.backendApplicationTests
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 3.936 s <<< FAILURE! - in com.spring.backend.backendApplicationTests
+contextLoads  Time elapsed: 0 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jwtUtils': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'ProjektBackend.app.jwtSecret' in value "${ProjektBackend.app.jwtSecret}"
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'ProjektBackend.app.jwtSecret' in value "${ProjektBackend.app.jwtSecret}"
+
