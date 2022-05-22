@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -71,6 +72,12 @@ public class UserController {
             throw new ResourceNotFoundException("User not found");
         }
     }
+
+    @PostConstruct
+    public void inserts(){
+    userService.initiateRoles();
+    }
+
 
     @DeleteMapping("/{id}")
     void deleteUser(@PathVariable Long id){

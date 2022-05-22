@@ -170,6 +170,30 @@ public class UserService {
             return updatedUser;
         }
         else throw new ResourceNotFoundException("User not found");
+    }
+
+    public void initiateRoles(){
+
+
+
+        Role userRole = new Role();
+        userRole.setName(ERole.User);
+        if(roleRepository.findByName(ERole.User).isEmpty()){
+            roleRepository.save(userRole);
+        }
+
+
+        Role contentCreatorRole = new Role();
+        contentCreatorRole.setName(ERole.ContentCreator);
+        if(roleRepository.findByName(ERole.ContentCreator).isEmpty()){
+            roleRepository.save(contentCreatorRole);
+        }
+
+        Role adminRole = new Role();
+        adminRole.setName(ERole.Admin);
+        if(roleRepository.findByName(ERole.Admin).isEmpty()){
+            roleRepository.save(adminRole);
+        }
 
     }
 
