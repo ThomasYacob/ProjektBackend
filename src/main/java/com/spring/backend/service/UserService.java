@@ -63,14 +63,6 @@ public class UserService {
         this.userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + id));
     }
 
-//    public User createNewUser(User user){
-//        Scoreboard scoreboard = new Scoreboard(user);
-//        user.setPassword(encodePassword(user.getPassword()));
-//        this.userRepository.save(user);
-//        scoreBoardService.addScoreBoard(scoreboard);
-//        return user;
-//    }
-
     public ResponseEntity<?> refreshToken(@Valid @RequestBody TokenRefreshRequest request) {
         String requestRefreshToken = request.getRefreshToken();
 
@@ -146,7 +138,9 @@ public class UserService {
             });
         }
         user.setRoles(roles);
+        Scoreboard temp = new Scoreboard(user);
         userRepository.save(user);
+        scoreBoardService.addScoreBoard(temp);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 

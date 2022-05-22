@@ -16,7 +16,7 @@ public class Weekly {
     @Id
     @GeneratedValue
     @Column(name = "weeklyID")
-    private int id;
+    private Long id;
     @Column(name = "question",nullable = false,length = 512)
     private String question;
     @Column(name = "answer", nullable = false,length = 512)

@@ -23,20 +23,20 @@ public class MonthlyService {
         return this.monthlyRepository.save(monthly);
     }
 
-    public Monthly getMonthly(int id) throws ResourceNotFoundException{
+    public Monthly getMonthly(Long id) throws ResourceNotFoundException{
         if(this.monthlyRepository.findById(id).isPresent()){
             return this.monthlyRepository.getById(id);
         }
         else throw new ResourceNotFoundException("Monthly not found");
     }
-    public void deleteMonthly(int id) throws ResourceNotFoundException{
+    public void deleteMonthly(Long id) throws ResourceNotFoundException{
         if(this.monthlyRepository.findById(id).isPresent()){
             this.monthlyRepository.deleteById(id);
         }
         else throw new ResourceNotFoundException("Monthly not found");
     }
 
-    public String findAnswerById(int id) throws ResourceNotFoundException{
+    public String findAnswerById(Long id) throws ResourceNotFoundException{
         if(this.monthlyRepository.findById(id).isPresent()){
             return this.monthlyRepository.getById(id).getAnswer();
         }

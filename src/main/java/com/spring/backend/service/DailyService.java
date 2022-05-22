@@ -24,14 +24,14 @@ public class DailyService {
     public Daily createNewDaily(Daily daily){
         return this.dailyRepository.save(daily);
     }
-    public Daily getDaily(int id) throws ResourceNotFoundException{
+    public Daily getDaily(Long id) throws ResourceNotFoundException{
         if(this.dailyRepository.findById(id).isPresent()){
             return this.dailyRepository.getById(id);
         }
         else throw new ResourceNotFoundException("Daily not found");
     }
 
-    public void deleteDaily(int id)throws ResourceNotFoundException{
+    public void deleteDaily(Long id)throws ResourceNotFoundException{
         if(this.dailyRepository.findById(id).isPresent()){
             this.dailyRepository.deleteById(id);
         }

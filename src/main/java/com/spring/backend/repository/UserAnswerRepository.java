@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.Set;
 
 @Repository
-public interface UserAnswerRepository extends JpaRepository<UserAnswer, Integer> {
-    @Query("SELECT ua FROM UserAnswer ua WHERE ua.user.username = ?1")
-    Set<UserAnswer> findUserAnswerByUsername(String username);
+public interface UserAnswerRepository extends JpaRepository<UserAnswer, Long> {
+    @Query("SELECT ua FROM UserAnswer ua WHERE ua.user.id = ?1")
+    Set<UserAnswer> findUserAnswerByUsername(Long id);
 
-    @Query("SELECT u from User u WHERE u.email = ?1")
-    User findUser(String email);
+    @Query("SELECT u from User u WHERE u.id = ?1")
+    User findUser(Long id);
 
 }

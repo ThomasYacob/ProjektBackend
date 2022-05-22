@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
-@RequestMapping("api/daily")
+@RequestMapping("/api/daily")
 public class DailyController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class DailyController {
     }
 
     @GetMapping("{id}")
-    Daily getMonthlyById(@PathVariable int id){
+    Daily getMonthlyById(@PathVariable Long id){
         try {
             return this.dailyService.getDaily(id);
         }catch (ResourceNotFoundException e){
@@ -39,7 +39,7 @@ public class DailyController {
     }
 
     @DeleteMapping("{id}")
-    void deleteDaily(@PathVariable int id){
+    void deleteDaily(@PathVariable Long id){
         try{
             this.dailyService.deleteDaily(id);
         }catch (ResourceNotFoundException e){

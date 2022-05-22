@@ -11,7 +11,7 @@ public class  Scoreboard {
     @Id
     @GeneratedValue
     @Column(name = "scoreID")
-    private int id;
+    private Long id;
     @Column(name = "dailyScore")
     private int dailyScore;
     @Column(name = "weeklyScore")
@@ -19,7 +19,7 @@ public class  Scoreboard {
     @Column(name = "monthlyScore")
     private int monthlyScore;
     @OneToOne
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "userId")
     private User user;
 
     public Scoreboard(User user) {

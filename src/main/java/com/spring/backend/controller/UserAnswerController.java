@@ -14,7 +14,7 @@ import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
-@RequestMapping("api")
+@RequestMapping("/api")
 
 public class UserAnswerController {
 
@@ -23,9 +23,9 @@ public class UserAnswerController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user/{userid}/userAnswers")
-    public Set<UserAnswer> getAnswers(@PathVariable(value = "userid") String email){
-        return userAnswerService.getUserAnswers(email);
+    @GetMapping("/user/{id}/userAnswers")
+    public Set<UserAnswer> getAnswers(@PathVariable(value = "id") Long id){
+        return userAnswerService.getUserAnswers(id);
     }
 
     @GetMapping("/user/userAnswers")
@@ -33,9 +33,9 @@ public class UserAnswerController {
         return userAnswerService.getAll();
     }
 
-    @PostMapping("/user/{userid}/userAnswers")
-    public UserAnswer setAnswer(@PathVariable(value = "userid") String email,@RequestBody UserAnswer userAnswer){
-        return userAnswerService.setUserAnswer(email,userAnswer);
+    @PostMapping("/user/{id}/userAnswers")
+    public UserAnswer setAnswer(@PathVariable(value = "id") Long id,@RequestBody UserAnswer userAnswer){
+        return userAnswerService.setUserAnswer(id,userAnswer);
     }
 
 

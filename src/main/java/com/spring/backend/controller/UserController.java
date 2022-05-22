@@ -1,17 +1,11 @@
 package com.spring.backend.controller;
 
-import com.spring.backend.config.CustomUserDetails;
 import com.spring.backend.config.jwt.JwtUtils;
-import com.spring.backend.exceptions.TokenRefreshException;
-import com.spring.backend.model.ERole;
-import com.spring.backend.model.RefreshToken;
+
 import com.spring.backend.model.Role;
 import com.spring.backend.payload.request.LoginRequest;
 import com.spring.backend.payload.request.SignupRequest;
 import com.spring.backend.payload.request.TokenRefreshRequest;
-import com.spring.backend.payload.response.JwtResponse;
-import com.spring.backend.payload.response.MessageResponse;
-import com.spring.backend.payload.response.TokenRefreshResponse;
 import com.spring.backend.repository.RoleRepository;
 import com.spring.backend.repository.UserRepository;
 import com.spring.backend.service.RefreshTokenService;
@@ -19,21 +13,15 @@ import com.spring.backend.service.UserService;
 import com.spring.backend.exceptions.ResourceNotFoundException;
 import com.spring.backend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -124,7 +112,7 @@ public class UserController {
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
 //        try {
-            return this.userService.refreshToken(request);
+        return this.userService.refreshToken(request);
 //        } catch (TokenRefreshException e) {
 //            throw new TokenRefreshException(e, "Refresh token is not in database!");
 //        }
