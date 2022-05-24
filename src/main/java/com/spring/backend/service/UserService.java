@@ -23,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
@@ -171,7 +172,7 @@ public class UserService {
         }
         else throw new ResourceNotFoundException("User not found");
     }
-
+    @PostConstruct
     public void initiateRoles(){
 
 
