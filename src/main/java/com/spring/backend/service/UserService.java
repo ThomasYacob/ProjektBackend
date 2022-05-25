@@ -172,11 +172,9 @@ public class UserService {
         }
         else throw new ResourceNotFoundException("User not found");
     }
+
     @PostConstruct
     public void initiateRoles(){
-
-
-
         Role userRole = new Role();
         userRole.setName(ERole.User);
         if(roleRepository.findByName(ERole.User).isEmpty()){
@@ -195,6 +193,10 @@ public class UserService {
         if(roleRepository.findByName(ERole.Admin).isEmpty()){
             roleRepository.save(adminRole);
         }
+    }
+
+    @PostConstruct
+    public void initiateAdmin() {
 
     }
 
