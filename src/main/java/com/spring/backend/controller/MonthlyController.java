@@ -35,6 +35,16 @@ public class MonthlyController {
         return this.monthlyService.createNewMonthly(newMonthly);
     }
 
+    @GetMapping("activeMonthly")
+    public Monthly getActiveMonthly(){
+        return this.monthlyService.findMonthlyActive();
+    }
+
+    @GetMapping("inactiveMonthlys")
+    public List<Monthly> getInactiveMonthly(){
+        return this.monthlyService.findAllMonthlysExceptCurrent();
+    }
+
     @DeleteMapping("{id}")
     void deleteMonthly(@PathVariable Long id){
         try{

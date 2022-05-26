@@ -13,6 +13,9 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(uniqueConstraints =
+        {
+        @UniqueConstraint(name = "UniqueAnswers", columnNames = {"user_id","typeOfQuestion","questionId"})})
 public class UserAnswer {
     @Id
     @GeneratedValue

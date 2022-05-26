@@ -25,7 +25,7 @@ public class DailyController {
     }
 
     @GetMapping("{id}")
-    Daily getMonthlyById(@PathVariable Long id){
+    public Daily getMonthlyById(@PathVariable Long id){
         try {
             return this.dailyService.getDaily(id);
         }catch (ResourceNotFoundException e){
@@ -33,8 +33,18 @@ public class DailyController {
         }
     }
 
+    @GetMapping("activeDaily")
+    public Daily getTodaysDaily(){
+        return this.dailyService.todaysDaily();
+    }
+
+    @GetMapping("inactiveDailys")
+    public List<Daily> getInactiveDailys(){
+        return this.dailyService.getAllDailysWithoutTodays();
+    }
+
     @PostMapping()
-    Daily createNewMonthly(@RequestBody Daily newDaily){
+    Daily createNewDaily(@RequestBody Daily newDaily){
         return this.dailyService.createNewDaily(newDaily);
     }
 

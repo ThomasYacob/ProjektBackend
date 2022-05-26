@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DailyService {
@@ -36,6 +39,17 @@ public class DailyService {
             this.dailyRepository.deleteById(id);
         }
         else throw new ResourceNotFoundException("Daily not found");
+    }
+
+    public Daily todaysDaily(){
+        Date todaysDate = new Date(LocalDate.now().getYear(),LocalDate.now().getDayOfMonth(),LocalDate.now().getDayOfYear());
+        return dailyRepository.findCurrentDaily(todaysDate);
+    }
+
+    public List<Daily> getAllDailysWithoutTodays(){
+        List<Daily> dailyList = this.getAllDaily();
+        dailyList.remove(this.todaysDaily());
+        return dailyList;
     }
 
     public List<Daily> getAllDaily(){

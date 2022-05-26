@@ -22,6 +22,11 @@ public class WeeklyController {
         return this.weeklyService.getAllWeekly();
     }
 
+    @GetMapping("getWeekly")
+    public Weekly getTodayWeekly(){
+        return this.weeklyService.todaysWeekly();
+    }
+
     @GetMapping("{id}")
     Weekly getWeeklyById(@PathVariable Long id){
         try {

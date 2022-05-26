@@ -174,6 +174,17 @@ public class UserService {
     }
     @PostConstruct
     public void initiateRoles(){
+        User adminUser = new User("gieseckeAdmin","giesecke@admin.com","devrientAdmin123.");
+        adminUser.setPassword(passwordEncoder.encode(adminUser.getPassword()));
+        Set<Role> roles = new HashSet<>();
+        Role userRoles = roleRepository.findByName(ERole.Admin)
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        roles.add(userRoles);
+        adminUser.setRoles(roles);
+        if(userRepository.findByUsername("gieseckeAdmin").isEmpty()){
+            userRepository.save(adminUser);
+        }
+
 
 
 

@@ -38,5 +38,10 @@ public class UserAnswerController {
         return userAnswerService.setUserAnswer(id,userAnswer);
     }
 
+    /*@GetMapping("/userAnswers/uncorrected")
+    public List<UserAnswer> getUncorrected(){
+
+    }*/
+
 
 }

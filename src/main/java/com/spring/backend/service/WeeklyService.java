@@ -6,6 +6,9 @@ import com.spring.backend.repository.WeeklyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -32,6 +35,11 @@ public class WeeklyService {
             this.weeklyRepository.deleteById(id);
         }
         else throw new ResourceNotFoundException("Weekly not found");
+    }
+
+    public Weekly todaysWeekly(){
+        Date todaysDate = new Date(LocalDate.now().getYear(),LocalDate.now().getDayOfMonth(),LocalDate.now().getDayOfYear());
+        return weeklyRepository.findCurrentWeekly(todaysDate);
     }
 
     public List<Weekly> getAllWeekly(){
