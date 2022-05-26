@@ -50,7 +50,7 @@ public class User {
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",orphanRemoval = true)
     private List<UserAnswer> userAnswers = new ArrayList<>();
 
     public User(String username, String email, String password) {

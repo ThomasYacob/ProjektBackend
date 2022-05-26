@@ -18,7 +18,8 @@ public class  Scoreboard {
     private int weeklyScore;
     @Column(name = "monthlyScore")
     private int monthlyScore;
-    @OneToOne
+    //@OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private User user;
 

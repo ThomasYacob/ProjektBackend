@@ -1,27 +1,15 @@
-package backend.service;
+package com.spring.backend.service;
 
-import com.spring.backend.model.Role;
 import com.spring.backend.model.User;
 import com.spring.backend.repository.ScoreboardRepository;
 import com.spring.backend.repository.UserRepository;
-import com.spring.backend.service.ScoreBoardService;
-import com.spring.backend.service.UserService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.BDDMockito.given;
-
-
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
-
-
 
     @Mock
     private UserRepository userRepository;
@@ -42,9 +30,9 @@ class UserServiceTest {
                 .role(Role.Admin)
                 .userAnswers(null)
                 .build();
-    }*/
+    }
 
-    /*@DisplayName("Test Add user")
+    @DisplayName("Test Add user")
     @Test
     void testAddUser() throws Exception{
         given(userRepository.save(user)).willReturn(user);
@@ -52,6 +40,4 @@ class UserServiceTest {
         System.out.println(userService.getUser("Redve@kth.se"));
         assertThat(saveUser).isNotNull();
     }*/
-
-
 }
