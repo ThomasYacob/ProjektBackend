@@ -1,10 +1,14 @@
 package com.spring.backend.model;
 
-
 import lombok.*;
 import javax.persistence.*;
 import java.sql.Date;
 
+/**
+ * A representation of the data for a Daily question in the system.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

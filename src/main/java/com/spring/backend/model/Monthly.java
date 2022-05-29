@@ -4,11 +4,15 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Date;
 
+/**
+ * A representation of the data for a Monthly assignment in the system.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
 public class Monthly {
     @Id
     @GeneratedValue

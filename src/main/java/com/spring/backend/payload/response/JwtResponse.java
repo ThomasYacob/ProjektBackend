@@ -2,6 +2,11 @@ package com.spring.backend.payload.response;
 
 import java.util.List;
 
+/**
+ * A representation of the JWT Token response sent from the Server to the Client.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 public class JwtResponse {
     private String token;
     private String type = "Bearer";

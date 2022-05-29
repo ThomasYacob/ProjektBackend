@@ -9,6 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
+/**
+ * This repository class is used to access, manage and
+ * persist data between the "UserAnswer" Objects and the database.
+ * This class extends JpaRepository, containing the basic CRUD operations
+ * and API for pagination and sorting.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Repository
 public interface UserAnswerRepository extends JpaRepository<UserAnswer, Long> {
     @Query("SELECT ua FROM UserAnswer ua WHERE ua.user.id = ?1")

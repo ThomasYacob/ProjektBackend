@@ -22,7 +22,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -30,6 +29,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * This service layer holds the business logic for the UserController class.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Service
 public class UserService {
 
@@ -49,6 +53,13 @@ public class UserService {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    /**
+     * Creates a ScoreboardRepository for this service layer,
+     * in order to perform CRUD operations on the database.
+     * @param userRepository the Repository for the User Objects.
+     * @param scoreBoardService the Service layer for Scoreboard.
+     * @param passwordEncoder the password encoder, providing password hashing function.
+     */
     @Autowired
     public UserService(UserRepository userRepository,ScoreBoardService scoreBoardService,BCryptPasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
@@ -56,14 +67,26 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Get all the Users from the database.
+     */
     public List<User> findAllUsers(){
         return this.userRepository.findAll();
     }
 
+    /**
+     * Deletes a specific User from the database, based on ID.
+     * @param id the ID of the User.
+     * @throws ResourceNotFoundException
+     */
     public void deleteUser(Long id) throws ResourceNotFoundException{
         this.userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + id));
     }
 
+    /**
+     * Receives a Refresh token request, and returns a Refresh token from the database.
+     * @param request the request header from the Client.
+     */
     public ResponseEntity<?> refreshToken(@Valid @RequestBody TokenRefreshRequest request) {
         String requestRefreshToken = request.getRefreshToken();
 
@@ -78,6 +101,11 @@ public class UserService {
                         "Refresh token is not in database!"));
     }
 
+    /**
+     * Handles a login request. If the User is registered and saved in the database,
+     * the login is succeeded and the User becomes authenticated.
+     * @param loginRequest the login request header from the Client.
+     */
     public ResponseEntity<?> logging(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -97,6 +125,10 @@ public class UserService {
                 customUserDetails.getUsername(), customUserDetails.getEmail(), roles));
     }
 
+    /**
+     * Saves a User and its associated Role in the database.
+     * @param signupRequest the signup request header from the Client.
+     */
     public ResponseEntity<?> createNewUser(@Valid @RequestBody SignupRequest signupRequest) {
         if (userRepository.existsByUsername(signupRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
@@ -145,14 +177,28 @@ public class UserService {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
+    /**
+     * Get a specific User from the database, based on ID.
+     * @param id the ID of the User.
+     * @throws ResourceNotFoundException
+     */
     public User getUser(Long id) throws  ResourceNotFoundException{
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + id));
     }
 
+    /**
+     * Method used for hashing a User's password.
+     * @param password User's password.
+     */
     private String encodePassword(String password) {
         return passwordEncoder.encode(password);
     }
 
+    /**
+     * Updates a User's information in the database, based on ID.
+     * @param id the ID of the User.
+     * @param userDetails the new user information.
+     */
     public User updateUser(Long id, User userDetails){
         User updateUser = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + id));
         updateUser.setUsername(userDetails.getUsername());
@@ -162,6 +208,12 @@ public class UserService {
         return userRepository.save(updateUser);
     }
 
+    /**
+     * Updates a specific User's Role, based on ID.
+     * @param id the ID of the User.
+     * @param role The new Role to be added.
+     * @throws ResourceNotFoundException
+     */
     public User alterUserRole(Long id, Role role) throws  ResourceNotFoundException{
         if (this.userRepository.findById(id).isPresent())
         {
@@ -172,6 +224,10 @@ public class UserService {
         }
         else throw new ResourceNotFoundException("User not found");
     }
+
+    /**
+     * Method used to initiate the Roles in the database.
+     */
     @PostConstruct
     public void initiateRoles(){
         User adminUser = new User("gieseckeAdmin","giesecke@admin.com","devrientAdmin123.");
@@ -185,15 +241,11 @@ public class UserService {
             userRepository.save(adminUser);
         }
 
-
-
-
         Role userRole = new Role();
         userRole.setName(ERole.User);
         if(roleRepository.findByName(ERole.User).isEmpty()){
             roleRepository.save(userRole);
         }
-
 
         Role contentCreatorRole = new Role();
         contentCreatorRole.setName(ERole.ContentCreator);
@@ -206,7 +258,6 @@ public class UserService {
         if(roleRepository.findByName(ERole.Admin).isEmpty()){
             roleRepository.save(adminRole);
         }
-
     }
 
 }

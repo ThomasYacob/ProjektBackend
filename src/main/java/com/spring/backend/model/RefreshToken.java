@@ -3,6 +3,11 @@ package com.spring.backend.model;
 import javax.persistence.*;
 import java.time.Instant;
 
+/**
+ * A representation of the data for a Refresh token.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Entity(name = "refreshtoken")
 public class RefreshToken {
 

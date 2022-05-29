@@ -2,6 +2,11 @@ package com.spring.backend.model;
 
 import javax.persistence.*;
 
+/**
+ * A representation of the data for a Role in the system.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Entity
 @Table(name = "roles")
 public class Role {

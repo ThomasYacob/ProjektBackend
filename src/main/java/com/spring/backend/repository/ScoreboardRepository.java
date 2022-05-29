@@ -6,6 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+/**
+ * This repository class is used to access, manage and
+ * persist data between the "Scoreboard" Objects and the database.
+ * This class extends JpaRepository, containing the basic CRUD operations
+ * and API for pagination and sorting.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Repository
 public interface ScoreboardRepository extends JpaRepository<Scoreboard, Long> {
     @Query("SELECT u FROM User u WHERE u.id = ?1")
