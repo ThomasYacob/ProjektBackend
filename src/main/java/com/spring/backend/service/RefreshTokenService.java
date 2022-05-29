@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service
 public class RefreshTokenService {
     @Value("${ProjektBackend.app.jwtRefreshExpirationMs}")
@@ -53,4 +52,8 @@ public class RefreshTokenService {
     public int deleteByUserId(Long userId) {
         return refreshTokenRepository.deleteByUser(userRepository.findById(userId).get());
     }
+//
+//    public void deleteUser(Long id) {
+//        this.refreshTokenRepository.deleteById(id);
+//    }
 }

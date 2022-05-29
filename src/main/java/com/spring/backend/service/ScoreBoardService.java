@@ -6,6 +6,7 @@ import com.spring.backend.model.User;
 import com.spring.backend.repository.ScoreboardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -65,5 +66,10 @@ public class ScoreBoardService {
             return scoreboardRepository.findScoreboardByUser(user);
         }
         throw new ResourceNotFoundException();
+    }
+
+    @Transactional
+    public int deleteByUserId(Long userId) {
+        return scoreboardRepository.deleteByUser(scoreboardRepository.findById(userId).get());
     }
 }
