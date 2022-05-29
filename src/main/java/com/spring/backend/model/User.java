@@ -25,13 +25,6 @@ uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")
 })
 public class User {
-//    @Id
-//    @Column(name = "email", nullable = false, length = 512,unique = true)
-//    private String email;
-//    @Column(name = "username", nullable = false, length = 512,unique = true)
-//    private String username;
-//    @Column(name = "password" ,nullable = false, length = 512)
-//    private String password;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

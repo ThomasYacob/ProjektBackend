@@ -14,9 +14,7 @@ public class RefreshToken {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-//    private String username;
 
-//    @JoinColumn(name = "user_username", referencedColumnName = "username")
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
@@ -29,14 +27,6 @@ public class RefreshToken {
 
     public RefreshToken() {
     }
-
-//    public String getUsername() {
-//        return username;
-//    }
-
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
 
     public long getId() {
         return id;

@@ -5,12 +5,9 @@ import com.spring.backend.model.Daily;
 import com.spring.backend.repository.DailyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 /**
  * This service layer holds the business logic for the DailyController class.

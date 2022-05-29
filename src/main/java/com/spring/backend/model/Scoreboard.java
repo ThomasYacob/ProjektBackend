@@ -24,7 +24,6 @@ public class  Scoreboard {
     @Column(name = "monthlyScore")
     private int monthlyScore;
     @OneToOne(cascade = CascadeType.ALL)
-    //@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private User user;
 

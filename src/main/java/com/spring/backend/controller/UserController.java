@@ -17,7 +17,6 @@ import com.spring.backend.service.UserService;
 import com.spring.backend.exceptions.ResourceNotFoundException;
 import com.spring.backend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,9 +25,14 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
-
+/**
+ * The controller class of the "User" REST API methods. This class is responsible
+ * for processing incoming HTTP requests, preparing a model and returning
+ * a response.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/user")
@@ -61,11 +65,18 @@ public class UserController {
     @Autowired
     RefreshTokenService refreshTokenService;
 
+    /**
+     * REST API Method to get all Users.
+     */
     @GetMapping("/all")
     public List<User> getAllUser(){
         return this.userService.findAllUsers();
     }
 
+    /**
+     * REST API Method to get User by ID.
+     * @param id the ID of the User.
+     */
     @GetMapping("/{id}")
     User getUserByMail(@PathVariable Long id)throws ResponseStatusException {
         try {
@@ -75,6 +86,10 @@ public class UserController {
         }
     }
 
+    /**
+     * REST API Method to create a new User.
+     * @param user the new User to create.
+     */
     @PostMapping()
     public ResponseEntity<?> createNewUser(@RequestBody SignupRequest user) {
         try {
@@ -84,6 +99,10 @@ public class UserController {
         }
     }
 
+    /**
+     * REST API Method to delete an existing User.
+     * @param id the ID of the User to delete.
+     */
     @DeleteMapping("/deleteuser/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable(value = "id") long id){
         try {
@@ -93,8 +112,12 @@ public class UserController {
         }
     }
 
+    /**
+     * REST API Method to update information of an existing User.
+     * @param id the ID of the User to update.
+     */
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") long id, Role role, @RequestBody User user) {
+    public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody User user) {
         try {
             return this.userService.updateUser(id, user);
         } catch (ResourceNotFoundException e){
@@ -102,35 +125,11 @@ public class UserController {
         }
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long id,
-//                                                   @Valid @RequestBody User userDetails) throws ResourceNotFoundException {
-//        User user = userRepository.findById(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + id));
-//
-//        user.setUsername(userDetails.getUsername());
-//        user.setEmail(userDetails.getEmail());
-//        user.setPassword(userDetails.getPassword());
-//        user.setRoles(userDetails.getRoles());
-//        final User updatedUser = userRepository.save(user);
-//        return ResponseEntity.ok(updatedUser);
-//    }
-//    @PutMapping("/{id}")
-//    public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody User user) {
-//        Optional<User> userData = userRepository.findById(id);
-//
-//        if(userData.isPresent()) {
-//            User _user = userData.get();
-//            _user.setUsername(user.getUsername());
-//            _user.setEmail(user.getEmail());
-//            _user.setPassword(user.getPassword());
-//            _user.setRoles(user.getRoles());
-//            return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
-
+    /**
+     * REST API Method to update the Role of an existing User.
+     * @param id the ID of the User to update.
+     * @param role the new Role.
+     */
     @PutMapping("/changeRole/{id}")
     User changeRoleUser(@PathVariable Long id,@RequestBody Role role){
         try {
@@ -140,6 +139,10 @@ public class UserController {
         }
     }
 
+    /**
+     * REST API Method that handle login request.
+     * @param loginRequest consist of username and password.
+     */
     @PostMapping("/login")
     public ResponseEntity<?> logging(@RequestBody LoginRequest loginRequest) {
         try {
@@ -149,6 +152,10 @@ public class UserController {
         }
     }
 
+    /**
+     * REST API Method that acquires the new access Token.
+     * @param request the HTTP request to obtain additional access token.
+     */
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
         return this.userService.refreshToken(request);

@@ -1,11 +1,9 @@
 package com.spring.backend.controller;
 
 import com.spring.backend.model.UserAnswer;
-import com.spring.backend.repository.UserAnswerRepository;
 import com.spring.backend.service.UserAnswerService;
 import com.spring.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Set;

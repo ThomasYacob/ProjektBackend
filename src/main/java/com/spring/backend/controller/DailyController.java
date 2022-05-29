@@ -2,8 +2,6 @@ package com.spring.backend.controller;
 
 import com.spring.backend.exceptions.ResourceNotFoundException;
 import com.spring.backend.model.Daily;
-import com.spring.backend.model.Monthly;
-import com.spring.backend.repository.DailyRepository;
 import com.spring.backend.service.DailyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
