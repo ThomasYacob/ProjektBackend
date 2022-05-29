@@ -10,6 +10,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * A representation of the data for a User in the system.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

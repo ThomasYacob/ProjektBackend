@@ -5,6 +5,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
+/**
+ * A representation of the signup HTTP request provided by the Client.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 public class SignupRequest {
     @NotBlank
     @Size(min = 3, max = 20)

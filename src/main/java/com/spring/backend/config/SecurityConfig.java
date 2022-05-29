@@ -19,9 +19,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import javax.sql.DataSource;
 
+/**
+ * This class handles the Spring Security configuration,
+ * and provides the Spring MVC integration.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -35,11 +40,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomUserDetailsService userDetailsService;
 
+    /**
+     * Sets up an in-memory User storage with a single user.
+     * @return the User's data.
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         return new CustomUserDetailsService();
     }
 
+    /**
+     * Checks if the input of the Authentication is valid.
+     * @return an Authentication instance with authenticated flag set to true.
+     * @throws Exception
+     */
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -49,16 +63,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
+    /**
+     * Checks if incoming request has a valid JWT.
+     * @return a AuthToken.
+     */
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
     }
 
+    /**
+     * Creates new hashed password for the User's password.
+     * @return new hashed password.
+     */
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Simple Authentication provider, uses DAO to retrieve user information.
+     * @return User details.
+     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -67,6 +93,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
+    /**
+     * Helper method that eases the setup of UserDetailService.
+     * @param authenticationManagerBuilder the Builder for AuthenticationManager Service.
+     * @throws Exception
+     */
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -89,7 +120,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    }
 
 
-
+    /**
+     * This method defines which API Endpoints should be secured and should be not,
+     * by writing which URLS require authentication or authorization.
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()

@@ -4,11 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 
+/**
+ * A representation of the data for the users' answers in the system.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,7 +35,7 @@ public class UserAnswer {
     private Long questionId;
     @Column(name = "corrected")
     private String corrected;
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore

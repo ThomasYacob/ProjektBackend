@@ -8,6 +8,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * This repository class is used to access, manage and
+ * persist data between the "RefreshToken" Objects and the database.
+ * This class extends JpaRepository, containing the basic CRUD operations
+ * and API for pagination and sorting.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Repository
 public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long> {
     Optional<RefreshToken> findByToken(String token);
