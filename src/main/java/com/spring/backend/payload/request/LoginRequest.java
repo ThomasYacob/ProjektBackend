@@ -1,8 +1,12 @@
 package com.spring.backend.payload.request;
 
-
 import javax.validation.constraints.NotBlank;
 
+/**
+ * A representation of the login HTTP request provided by the Client.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 public class LoginRequest {
 //    @NotBlank
     private String username;

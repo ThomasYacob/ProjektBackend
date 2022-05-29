@@ -1,5 +1,10 @@
 package com.spring.backend.payload.response;
 
+/**
+ * A representation of the Refresh Token response sent from the Server to the Client.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 public class TokenRefreshResponse {
     private String accessToken;
     private String refreshToken;

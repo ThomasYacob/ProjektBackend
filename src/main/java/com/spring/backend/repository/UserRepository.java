@@ -7,9 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
+/**
+ * This repository class is used to access, manage and
+ * persist data between the "User" Objects and the database.
+ * This class extends JpaRepository, containing the basic CRUD operations
+ * and API for pagination and sorting.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);

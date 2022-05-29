@@ -9,7 +9,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +18,12 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class used supports Cross-Origin Resource Sharing (CORS)
+ * to Java web applications.
+ *
+ * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
+ */
 @Component
 @Order(value = Ordered.HIGHEST_PRECEDENCE)
 @Slf4j
