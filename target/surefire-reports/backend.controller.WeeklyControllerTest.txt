@@ -1,7 +1,0 @@
--------------------------------------------------------------------------------
-Test set: backend.controller.WeeklyControllerTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.005 s <<< FAILURE! - in backend.controller.WeeklyControllerTest
-backend.controller.WeeklyControllerTest  Time elapsed: 0.005 s  <<< ERROR!
-java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test
-

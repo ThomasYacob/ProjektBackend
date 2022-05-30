@@ -1,7 +1,8 @@
-/Users/thomas/Documents/ProjektBackend/src/test/java/backend/controller/WeeklyControllerTest.java
-/Users/thomas/Documents/ProjektBackend/src/test/java/backend/service/UserServiceTest.java
-/Users/thomas/Documents/ProjektBackend/src/test/java/backend/controller/MonthlyControllerTest.java
-/Users/thomas/Documents/ProjektBackend/src/test/java/backend/controller/ScoreBoardControllerTest.java
-/Users/thomas/Documents/ProjektBackend/src/test/java/backend/controller/DailyControllerTest.java
-/Users/thomas/Documents/ProjektBackend/src/test/java/com/spring/backend/CheckHTTPResponse.java
-/Users/thomas/Documents/ProjektBackend/src/test/java/com/spring/backend/backendApplicationTests.java
+/home/redvea/Koder/Projektet/ProjektBackend/src/test/java/com/spring/backend/backendApplicationTests.java
+/home/redvea/Koder/Projektet/ProjektBackend/src/test/java/com/spring/backend/controller/MonthlyControllerTest.java
+/home/redvea/Koder/Projektet/ProjektBackend/src/test/java/com/spring/backend/controller/UserControllerTest.java
+/home/redvea/Koder/Projektet/ProjektBackend/src/test/java/com/spring/backend/controller/WeeklyControllerTest.java
+/home/redvea/Koder/Projektet/ProjektBackend/src/test/java/com/spring/backend/controller/ScoreBoardControllerTest.java
+/home/redvea/Koder/Projektet/ProjektBackend/src/test/java/com/spring/backend/controller/DailyControllerTest.java
+/home/redvea/Koder/Projektet/ProjektBackend/src/test/java/com/spring/backend/controller/UserAnswerControllerTest.java
+/home/redvea/Koder/Projektet/ProjektBackend/src/test/java/com/spring/backend/CheckHTTPResponse.java

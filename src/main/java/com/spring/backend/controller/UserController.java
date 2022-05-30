@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    User getUserByMail(@PathVariable Long id)throws ResponseStatusException {
+    public User getUserByMail(@PathVariable Long id)throws ResponseStatusException {
         try {
             return this.userService.getUser(id);
         } catch (ResourceNotFoundException e){
@@ -73,14 +73,15 @@ public class UserController {
         }
     }
 
-    @PostConstruct
-    public void inserts(){
-    userService.initiateRoles();
+    @GetMapping("/getAll")
+    public List<String> getAllWithoutAdmin(){
+        return this.userService.findAllUsersExceptAdmin();
     }
 
 
+
     @DeleteMapping("/{id}")
-    void deleteUser(@PathVariable Long id){
+    public void deleteUser(@PathVariable Long id){
         try {
             this.userService.deleteUser(id);
         } catch (ResourceNotFoundException e){
@@ -108,7 +109,7 @@ public class UserController {
     }
 
     @PutMapping("changeRole/{id}")
-    User changeRoleUser(@PathVariable Long id,@RequestBody Role role){
+    public User changeRoleUser(@PathVariable Long id,@RequestBody Role role){
         try {
             return this.userService.alterUserRole(id, role);
         } catch (ResourceNotFoundException e){

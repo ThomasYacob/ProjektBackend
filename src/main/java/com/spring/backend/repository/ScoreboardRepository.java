@@ -11,6 +11,9 @@ public interface ScoreboardRepository extends JpaRepository<Scoreboard, Long> {
     @Query("SELECT u FROM User u WHERE u.id = ?1")
     User findByIdUser(Long id);
 
+    @Query("SELECT u FROM User u WHERE u.username = ?1")
+    User findByUsername(String username);
+
     @Query("SELECT u FROM Scoreboard u where u.user = ?1")
     Scoreboard findScoreboardByUser(User user);
 

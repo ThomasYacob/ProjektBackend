@@ -1,6 +1,7 @@
 package com.spring.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -16,7 +17,7 @@ import java.sql.Date;
 @Table(uniqueConstraints =
         {
         @UniqueConstraint(name = "UniqueAnswers", columnNames = {"user_id","typeOfQuestion","questionId"})})
-public class UserAnswer {
+public class UserAnswer implements Serializable{
     @Id
     @GeneratedValue
     @Column(name = "userAnswerid")
@@ -34,7 +35,7 @@ public class UserAnswer {
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "user_id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"UserAnswer", "hibernateLazyInitializer"})
     private User user;
 
     public UserAnswer(String answer, Date date, com.spring.backend.model.typeOfQuestion typeOfQuestion, Long questionId, User user) {

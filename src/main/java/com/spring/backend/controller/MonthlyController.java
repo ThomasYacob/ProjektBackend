@@ -22,7 +22,7 @@ public class MonthlyController {
     }
 
     @GetMapping("{id}")
-    Monthly getMonthlyById(@PathVariable Long id){
+    public Monthly getMonthlyById(@PathVariable Long id){
         try {
             return this.monthlyService.getMonthly(id);
         }catch (ResourceNotFoundException e){
@@ -31,7 +31,7 @@ public class MonthlyController {
     }
 
     @PostMapping()
-    Monthly createNewMonthly(@RequestBody Monthly newMonthly){
+    public Monthly createNewMonthly(@RequestBody Monthly newMonthly){
         return this.monthlyService.createNewMonthly(newMonthly);
     }
 
@@ -46,13 +46,15 @@ public class MonthlyController {
     }
 
     @DeleteMapping("{id}")
-    void deleteMonthly(@PathVariable Long id){
+    public void deleteMonthly(@PathVariable Long id){
         try{
             this.monthlyService.deleteMonthly(id);
         }catch (ResourceNotFoundException e){
             throw new ResourceNotFoundException("Monthly not found");
         }
     }
+
+
 
 
 }

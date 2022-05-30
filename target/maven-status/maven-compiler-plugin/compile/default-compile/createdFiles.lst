@@ -8,8 +8,8 @@ com/spring/backend/payload/response/JwtResponse.class
 com/spring/backend/model/Monthly.class
 com/spring/backend/config/jwt/AuthEntryPointJwt.class
 com/spring/backend/controller/MonthlyController.class
-com/spring/backend/model/ERole.class
 com/spring/backend/service/WeeklyService.class
+com/spring/backend/model/ERole.class
 com/spring/backend/repository/MonthlyRepository.class
 com/spring/backend/config/CustomUserDetailsService.class
 com/spring/backend/model/RefreshToken.class
@@ -27,8 +27,8 @@ com/spring/backend/config/jwt/AuthTokenFilter.class
 com/spring/backend/payload/response/TokenRefreshResponse.class
 com/spring/backend/repository/DailyRepository.class
 com/spring/backend/controller/WeeklyController.class
-com/spring/backend/exceptions/TokenRefreshException.class
 com/spring/backend/repository/UserRepository.class
+com/spring/backend/exceptions/TokenRefreshException.class
 com/spring/backend/payload/request/TokenRefreshRequest.class
 com/spring/backend/model/typeOfQuestion.class
 com/spring/backend/model/Daily.class
@@ -39,9 +39,10 @@ com/spring/backend/service/RefreshTokenService.class
 com/spring/backend/repository/ScoreboardRepository.class
 com/spring/backend/repository/RoleRepository.class
 com/spring/backend/model/Scoreboard.class
-com/spring/backend/controller/ScoreBoardController.class
 com/spring/backend/service/DailyService.class
+com/spring/backend/controller/ScoreBoardController.class
 com/spring/backend/config/SecurityConfig.class
+com/spring/backend/config/SimpleCORSFilter.class
 com/spring/backend/repository/UserAnswerRepository.class
 com/spring/backend/payload/request/LogOutRequest.class
 com/spring/backend/repository/RefreshTokenRepository.class

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,9 +60,19 @@ public class UserService {
     public List<User> findAllUsers(){
         return this.userRepository.findAll();
     }
+    public List<String> findAllUsersExceptAdmin(){
+        List<User> temp = userRepository.findAll();
+        List<String> stringList = new ArrayList<>();
+        temp.remove(0);
+        for (User user: temp) {
+            stringList.add(user.getUsername());
+        }
+        return stringList;
+    }
 
     public void deleteUser(Long id) throws ResourceNotFoundException{
         this.userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + id));
+
     }
 
     public ResponseEntity<?> refreshToken(@Valid @RequestBody TokenRefreshRequest request) {
@@ -113,7 +124,7 @@ public class UserService {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.Admin)
+            Role userRole = roleRepository.findByName(ERole.User)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
@@ -173,40 +184,57 @@ public class UserService {
         else throw new ResourceNotFoundException("User not found");
     }
     @PostConstruct
-    public void initiateRoles(){
-        User adminUser = new User("gieseckeAdmin","giesecke@admin.com","devrientAdmin123.");
-        adminUser.setPassword(passwordEncoder.encode(adminUser.getPassword()));
-        Set<Role> roles = new HashSet<>();
-        Role userRoles = roleRepository.findByName(ERole.Admin)
-                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-        roles.add(userRoles);
-        adminUser.setRoles(roles);
-        if(userRepository.findByUsername("gieseckeAdmin").isEmpty()){
-            userRepository.save(adminUser);
-        }
-
-
-
+    public void initiateDatabaseValues(){
 
         Role userRole = new Role();
         userRole.setName(ERole.User);
         if(roleRepository.findByName(ERole.User).isEmpty()){
             roleRepository.save(userRole);
         }
-
-
         Role contentCreatorRole = new Role();
         contentCreatorRole.setName(ERole.ContentCreator);
         if(roleRepository.findByName(ERole.ContentCreator).isEmpty()){
             roleRepository.save(contentCreatorRole);
         }
-
         Role adminRole = new Role();
         adminRole.setName(ERole.Admin);
         if(roleRepository.findByName(ERole.Admin).isEmpty()){
             roleRepository.save(adminRole);
+            System.out.println("Hello");
         }
 
+        SignupRequest adminUser = new SignupRequest();
+        adminUser.setUsername("gieseckeAdmin");
+        adminUser.setPassword("devrientAdmin123.");
+        adminUser.setEmail("giesecke@admin.com");
+        if(userRepository.findByUsername("gieseckeAdmin").isEmpty()){
+            this.createNewUserAdmin(adminUser);
+        }
+    }
+
+    private ResponseEntity<?> createNewUserAdmin(@Valid @RequestBody SignupRequest signupRequest) {
+        if (userRepository.existsByUsername(signupRequest.getUsername())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+        }
+
+        if (userRepository.existsByEmail(signupRequest.getEmail())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+        }
+
+        User user = new User(signupRequest.getUsername(), signupRequest.getEmail(),
+                passwordEncoder.encode(signupRequest.getPassword()));
+
+        Set<String> strRoles = signupRequest.getRole();
+        Set<Role> roles = new HashSet<>();
+
+        if (strRoles == null) {
+            Role userRole = roleRepository.findByName(ERole.Admin)
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            roles.add(userRole);
+        }
+        user.setRoles(roles);
+        userRepository.save(user);
+        return ResponseEntity.ok(new MessageResponse("Admin registered successfully!"));
     }
 
 }

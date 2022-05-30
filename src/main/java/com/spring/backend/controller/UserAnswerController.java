@@ -38,10 +38,16 @@ public class UserAnswerController {
         return userAnswerService.setUserAnswer(id,userAnswer);
     }
 
-    /*@GetMapping("/userAnswers/uncorrected")
+    @GetMapping("/userAnswers/uncorrected")
     public List<UserAnswer> getUncorrected(){
+        return userAnswerService.getAllUncorrected();
+    }
 
-    }*/
+
+    @PutMapping("/userAnswers/{id}")
+    public UserAnswer setToCorrected(@PathVariable long id){
+        return this.userAnswerService.setToCorrected(id);
+    }
 
 
 }

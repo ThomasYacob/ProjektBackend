@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.sql.Date;
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -42,8 +43,10 @@ public class DailyService {
     }
 
     public Daily todaysDaily(){
-        Date todaysDate = new Date(LocalDate.now().getYear(),LocalDate.now().getDayOfMonth(),LocalDate.now().getDayOfYear());
-        return dailyRepository.findCurrentDaily(todaysDate);
+        Clock cl = Clock.systemUTC();
+        LocalDate todaysDate = LocalDate.now(cl);
+        Date date = Date.valueOf(todaysDate);
+        return dailyRepository.findCurrentDaily(date);
     }
 
     public List<Daily> getAllDailysWithoutTodays(){

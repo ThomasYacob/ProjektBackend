@@ -1,13 +1,15 @@
 package com.spring.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class  Scoreboard {
+public class  Scoreboard implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "scoreID")
@@ -18,8 +20,9 @@ public class  Scoreboard {
     private int weeklyScore;
     @Column(name = "monthlyScore")
     private int monthlyScore;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
+    @JsonIgnore
     private User user;
 
     public Scoreboard(User user) {
