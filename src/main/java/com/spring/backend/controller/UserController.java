@@ -1,7 +1,7 @@
 package com.spring.backend.controller;
 
 import com.spring.backend.config.jwt.JwtUtils;
-
+import com.spring.backend.model.Daily;
 import com.spring.backend.model.Role;
 import com.spring.backend.payload.request.LogOutRequest;
 import com.spring.backend.payload.request.LoginRequest;
@@ -16,6 +16,11 @@ import com.spring.backend.service.ScoreBoardService;
 import com.spring.backend.service.UserService;
 import com.spring.backend.exceptions.ResourceNotFoundException;
 import com.spring.backend.model.User;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,6 +38,7 @@ import java.util.List;
  *
  * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
  */
+@Tag(name = "user", description = "Operations about User")
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/user")
@@ -65,18 +71,17 @@ public class UserController {
     @Autowired
     RefreshTokenService refreshTokenService;
 
-    /**
-     * REST API Method to get all Users.
-     */
+    @Operation(summary = "Get Users", description = "Retrieves all Users saved in the database.",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @GetMapping("/all")
     public List<User> getAllUser(){
         return this.userService.findAllUsers();
     }
 
-    /**
-     * REST API Method to get User by ID.
-     * @param id the ID of the User.
-     */
+    @Operation(summary = "Get User", description = "Retrieves a specific User, based on User ID.",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @GetMapping("/{id}")
     User getUserByMail(@PathVariable Long id)throws ResponseStatusException {
         try {
@@ -86,10 +91,9 @@ public class UserController {
         }
     }
 
-    /**
-     * REST API Method to create a new User.
-     * @param user the new User to create.
-     */
+    @Operation(summary = "Create User", description = "Creates and saves a User in the database.",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @PostMapping()
     public ResponseEntity<?> createNewUser(@RequestBody SignupRequest user) {
         try {
@@ -99,10 +103,9 @@ public class UserController {
         }
     }
 
-    /**
-     * REST API Method to delete an existing User.
-     * @param id the ID of the User to delete.
-     */
+    @Operation(summary = "Delete User", description = "Deletes a specific User from the database, based on User ID.",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @DeleteMapping("/deleteuser/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable(value = "id") long id){
         try {
@@ -112,10 +115,9 @@ public class UserController {
         }
     }
 
-    /**
-     * REST API Method to update information of an existing User.
-     * @param id the ID of the User to update.
-     */
+    @Operation(summary = "Update User", description = "Updates the information in the database about a specific User, based on User ID.",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody User user) {
         try {
@@ -125,11 +127,9 @@ public class UserController {
         }
     }
 
-    /**
-     * REST API Method to update the Role of an existing User.
-     * @param id the ID of the User to update.
-     * @param role the new Role.
-     */
+    @Operation(summary = "Update User Role", description = "Updates the Role of a specific User, based on User ID.",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @PutMapping("/changeRole/{id}")
     User changeRoleUser(@PathVariable Long id,@RequestBody Role role){
         try {
@@ -139,10 +139,9 @@ public class UserController {
         }
     }
 
-    /**
-     * REST API Method that handle login request.
-     * @param loginRequest consist of username and password.
-     */
+    @Operation(summary = "Login", description = "Handles the login and authentication for a User.",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @PostMapping("/login")
     public ResponseEntity<?> logging(@RequestBody LoginRequest loginRequest) {
         try {
@@ -152,15 +151,17 @@ public class UserController {
         }
     }
 
-    /**
-     * REST API Method that acquires the new access Token.
-     * @param request the HTTP request to obtain additional access token.
-     */
+    @Operation(summary = "Get Refresh Token", description = "Acquires a new Refresh Token.",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
         return this.userService.refreshToken(request);
     }
 
+    @Operation(summary = "Logout", description = "Handles the logout and marks the user as unauthenticated.",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @PostMapping("/logout")
     public ResponseEntity<?> logoutUser(@Valid @RequestBody LogOutRequest logOutRequest) {
         refreshTokenService.deleteByUserId(logOutRequest.getUserId());
