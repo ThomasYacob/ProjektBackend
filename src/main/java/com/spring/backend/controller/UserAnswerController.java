@@ -56,9 +56,4 @@ public class UserAnswerController {
     public UserAnswer setAnswer(@PathVariable(value = "id") Long id,@RequestBody UserAnswer userAnswer){
         return userAnswerService.setUserAnswer(id,userAnswer);
     }
-
-    /*@GetMapping("/userAnswers/uncorrected")
-    public List<UserAnswer> getUncorrected(){
-
-    }*/
 }
