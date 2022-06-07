@@ -60,8 +60,8 @@ public class ScoreBoardService {
      * @param weeklyPoints amount of points to add.
      * @throws ResourceNotFoundException
      */
-    public Scoreboard modifyScoreBoardWeekly(Long id, int weeklyPoints) throws ResourceNotFoundException{
-        User user = scoreboardRepository.findByIdUser(id);
+    public Scoreboard modifyScoreBoardWeekly(String id, int weeklyPoints) throws ResourceNotFoundException{
+        User user = scoreboardRepository.findByUsername(id);
         if(user != null){
             Scoreboard temp = scoreboardRepository.findScoreboardByUser(user);
             temp.setWeeklyScore(temp.getWeeklyScore()+weeklyPoints);
@@ -76,8 +76,8 @@ public class ScoreBoardService {
      * @param monthlyPoints amount of points to add.
      * @throws ResourceNotFoundException
      */
-    public Scoreboard modifyScoreBoardMonthly(Long id, int monthlyPoints) throws ResourceNotFoundException{
-        User user = scoreboardRepository.findByIdUser(id);
+    public Scoreboard modifyScoreBoardMonthly(String id, int monthlyPoints) throws ResourceNotFoundException{
+        User user = scoreboardRepository.findByUsername(id);
         if(user != null){
             Scoreboard temp = scoreboardRepository.findScoreboardByUser(user);
             temp.setMonthlyScore(temp.getMonthlyScore()+monthlyPoints);
@@ -91,6 +91,16 @@ public class ScoreBoardService {
      */
     public List<Scoreboard> getAllScoreBoard(){
         return this.scoreboardRepository.findAll();
+    }
+
+    public Scoreboard alterScoreBoard(String username,Long type,int points){
+
+        if(type == 1){
+            return modifyScoreBoardMonthly(username,points);
+        }else if(type == 2){
+            return modifyScoreBoardWeekly(username,points);
+        }
+        else return null;
     }
 
 

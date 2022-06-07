@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -157,7 +158,7 @@ public class UserService {
 
                         break;
                     default:
-                        Role userRole = roleRepository.findByName(ERole.User)
+                        Role userRole = roleRepository.findByName(ERole.ContentCreator)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
                 }
@@ -168,6 +169,16 @@ public class UserService {
         userRepository.save(user);
         scoreBoardService.addScoreBoard(temp);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    public List<String> findAllUsersExceptAdmin(){
+        List<User> temp = userRepository.findAll();
+        List<String> stringList = new ArrayList<>();
+        temp.remove(0);
+        for (User user: temp) {
+            stringList.add(user.getUsername());
+        }
+        return stringList;
     }
 
     /**
@@ -249,7 +260,6 @@ public class UserService {
         adminRole.setName(ERole.Admin);
         if(roleRepository.findByName(ERole.Admin).isEmpty()){
             roleRepository.save(adminRole);
-            System.out.println("Hello");
         }
 
         SignupRequest adminUser = new SignupRequest();

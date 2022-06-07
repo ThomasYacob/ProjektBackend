@@ -68,7 +68,7 @@ public class DailyController {
             responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
                     content = @Content(schema = @Schema(implementation = Daily.class)))})
     @PostMapping()
-    Daily createNewDaily(@RequestBody Daily newDaily){
+    public Daily createNewDaily(@RequestBody Daily newDaily){
         return this.dailyService.createNewDaily(newDaily);
     }
 
@@ -76,11 +76,13 @@ public class DailyController {
             responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
                     content = @Content(schema = @Schema(implementation = Daily.class)))})
     @DeleteMapping("{id}")
-    void deleteDaily(@PathVariable Long id){
+    public void deleteDaily(@PathVariable Long id){
         try{
             this.dailyService.deleteDaily(id);
         }catch (ResourceNotFoundException e){
             throw new ResourceNotFoundException("Daily not found");
         }
     }
+
+
 }

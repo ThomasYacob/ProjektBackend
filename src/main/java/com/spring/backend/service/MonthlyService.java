@@ -5,6 +5,8 @@ import com.spring.backend.model.Monthly;
 import com.spring.backend.repository.MonthlyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -77,10 +79,11 @@ public class MonthlyService {
      */
     public Monthly findMonthlyActive(){
         List<Monthly> monthlyList = this.monthlyRepository.findAll();
-        int year = LocalDate.now().getYear();
-        int month = LocalDate.now().getMonthValue();
+        Clock cl = Clock.systemUTC();
+        int year = LocalDate.now(cl).getYear();
+        int month = LocalDate.now(cl).getMonthValue();
         for (Monthly monthly: monthlyList) {
-            if(monthly.getDate().getMonth()== month && monthly.getDate().getYear() == year)
+            if(monthly.getDate().getMonth() == month && monthly.getDate().getYear() == year)
             {
                 return monthly;
             }
