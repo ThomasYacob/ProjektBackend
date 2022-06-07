@@ -112,6 +112,11 @@ public class UserController {
         }
     }
 
+    @GetMapping("/getAll")
+    public List<String> getAllWithoutAdmin(){
+        return this.userService.findAllUsersExceptAdmin();
+    }
+
     /**
      * REST API Method to update information of an existing User.
      * @param id the ID of the User to update.
