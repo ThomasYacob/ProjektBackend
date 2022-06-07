@@ -103,8 +103,8 @@ public class UserController {
      * REST API Method to delete an existing User.
      * @param id the ID of the User to delete.
      */
-    @DeleteMapping("/deleteuser/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable(value = "id") long id){
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable long id){
         try {
             return userService.deleteUser(id);
         } catch (ResourceNotFoundException e){

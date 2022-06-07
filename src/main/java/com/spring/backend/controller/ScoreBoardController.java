@@ -28,12 +28,17 @@ public class ScoreBoardController {
         return this.scoreBoardService.getAllScoreBoard();
     }
 
+    @PutMapping("alterScoreBoard/{userId}/{type}")
+    public Scoreboard alterScoreBoard(@PathVariable String username, @PathVariable Long type,@RequestBody int points){
+        return this.scoreBoardService.alterScoreBoard(username,type,points);
+    }
+
     /**
      * REST API Method to get a Scoreboard by User ID.
      * @param id the ID of the User.
      */
     @GetMapping("{id}")
     public Scoreboard getUserScoreboard(@PathVariable Long id){
-        return scoreBoardService.getScoreForUser(id);
+        return this.scoreBoardService.getScoreForUser(id);
     }
 }

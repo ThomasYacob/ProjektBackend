@@ -64,7 +64,7 @@ public class DailyController {
      * @param newDaily the Daily question to create.
      */
     @PostMapping()
-    Daily createNewDaily(@RequestBody Daily newDaily){
+    public Daily createNewDaily(@RequestBody Daily newDaily){
         return this.dailyService.createNewDaily(newDaily);
     }
 
@@ -73,11 +73,13 @@ public class DailyController {
      * @param id the ID of the Daily question.
      */
     @DeleteMapping("{id}")
-    void deleteDaily(@PathVariable Long id){
+    public void deleteDaily(@PathVariable Long id){
         try{
             this.dailyService.deleteDaily(id);
         }catch (ResourceNotFoundException e){
             throw new ResourceNotFoundException("Daily not found");
         }
     }
+
+
 }
