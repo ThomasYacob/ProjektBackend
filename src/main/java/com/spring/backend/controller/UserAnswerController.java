@@ -1,8 +1,14 @@
 package com.spring.backend.controller;
 
+import com.spring.backend.model.Daily;
 import com.spring.backend.model.UserAnswer;
 import com.spring.backend.service.UserAnswerService;
 import com.spring.backend.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -15,6 +21,7 @@ import java.util.Set;
  *
  * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
  */
+@Tag(name = "userAnswer", description = "Operations about Users' answers.")
 @RestController
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 @RequestMapping("/api")
@@ -26,28 +33,25 @@ public class UserAnswerController {
     @Autowired
     private UserService userService;
 
-    /**
-     * REST API Method to get a User Answer by User ID.
-     * @param id the ID of the User.
-     */
+    @Operation(summary = "Get Answer by ID", description = "Retrieves all Answers for a specific User, based on User ID",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @GetMapping("/user/{id}/userAnswers")
     public Set<UserAnswer> getAnswers(@PathVariable(value = "id") Long id){
         return userAnswerService.getUserAnswers(id);
     }
 
-    /**
-     * REST API Method to get all User Answers.
-     */
+    @Operation(summary = "Get Answers", description = "Retrieves all Answers saved in the database.",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @GetMapping("/user/userAnswers")
     public List<UserAnswer> getAll(){
         return userAnswerService.getAll();
     }
 
-    /**
-     * REST API Method to create a new User Answer.
-     * @param id the ID of the User.
-     * @param userAnswer the User Answer to create.
-     */
+    @Operation(summary = "Create Answer", description = "Creates and saves a User's answer in the database.",
+            responses = {@ApiResponse(responseCode = "200", description = "Successful Response",
+                    content = @Content(schema = @Schema(implementation = Daily.class)))})
     @PostMapping("/user/{id}/userAnswers")
     public UserAnswer setAnswer(@PathVariable(value = "id") Long id,@RequestBody UserAnswer userAnswer){
         return userAnswerService.setUserAnswer(id,userAnswer);

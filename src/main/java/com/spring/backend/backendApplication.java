@@ -1,6 +1,9 @@
 package com.spring.backend;
 
 import com.spring.backend.repository.UserRepository;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +16,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @authors Thomas Yacob, Redve Ahmed, Zaed Noori
  */
 @SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "Competitive Assignments API", version = "2.6.6",description = "Documentation for the Schemas & REST API methods provided" +
+        " by the Server."))
 public class backendApplication implements CommandLineRunner {
 
     /**
